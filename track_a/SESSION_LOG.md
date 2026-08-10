@@ -39,4 +39,31 @@ harness change; noted, not requested).
 
 ### State
 
-- Scaffolding started. Next: TDD on the scenario generator.
+Deliverables 1 through 3 are DONE and pushed:
+
+1. Scenario generator (conflict/scenarios.py): 200-seed property sweeps prove
+   required subsets sufficient + each-necessary + no-proper-subset-suffices,
+   practiced pattern right on routine and wrong on novel, no label leakage.
+2. Oracle modules with stance revision (conflict/modules.py), oracle
+   controller, and the three architectures (conflict/architectures.py) on top
+   of gwbench's Workspace, imported read-only. Metrics in conflict/metrics.py.
+3. Offline validation (validate_offline.py, 240 scenarios, 720 trials): all
+   nine signature checks PASS. A shows revision 0.136 on novel and 0.000 on
+   routine, resolves every conflict, recruits every required module with zero
+   floor waste (mean 2.17 cycles); B shows zero formation and revision ever;
+   C shows no dynamics. Report: VALIDATION.md, validation_results.json.
+
+Design notes worth keeping:
+- Salience ordering (criterion > attributes > defeater > stance > context)
+  makes the practiced pattern surface first and the objection interrupt it;
+  that ordering is what makes conflict-then-repair observable in A rather
+  than pre-resolved. Pinned by test.
+- Capacity default 32 whitespace tokens: the longest generated statement is
+  30, and content a workspace cannot admit whole is never delivered (gwbench
+  truncation semantics), so capacity below ~30 livelocks a defeater. The
+  funded run must respect this floor.
+- TDD note for honesty: stance formation/revision behavior landed one green
+  step early (with the first module test) so those specific tests passed on
+  first run; controller, architectures, metrics, validation were red first.
+
+Next: deliverable 4 (grading spec + parser), then 5 (PREREG.md).

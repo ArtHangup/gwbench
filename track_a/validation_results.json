@@ -1,0 +1,65 @@
+{
+  "n_per_cell": 30,
+  "n_scenarios": 240,
+  "n_trials": 720,
+  "checks": {
+    "gwt_novel_revises": true,
+    "gwt_novel_resolves": true,
+    "gwt_routine_no_revision": true,
+    "gwt_recruits_all_required": true,
+    "gwt_no_floor_waste": true,
+    "hub_zero_revision": true,
+    "hub_zero_formation": true,
+    "flat_no_dynamics": true,
+    "all_architectures_decide_correctly": true
+  },
+  "table": {
+    "gwt/routine": {
+      "n": 120,
+      "accuracy": 1.0,
+      "revision_rate": 0.0,
+      "formations": 5.0,
+      "resolved": 1.0
+    },
+    "hub/routine": {
+      "n": 120,
+      "accuracy": 1.0,
+      "revision_rate": 0.0,
+      "formations": 0.0,
+      "resolved": 0.0
+    },
+    "flat/routine": {
+      "n": 120,
+      "accuracy": 1.0,
+      "revision_rate": 0.0,
+      "formations": 0.0,
+      "resolved": 0.0
+    },
+    "gwt/novel": {
+      "n": 120,
+      "accuracy": 1.0,
+      "revision_rate": 0.13619047619047617,
+      "formations": 5.0,
+      "resolved": 1.0
+    },
+    "hub/novel": {
+      "n": 120,
+      "accuracy": 1.0,
+      "revision_rate": 0.0,
+      "formations": 0.0,
+      "resolved": 0.0
+    },
+    "flat/novel": {
+      "n": 120,
+      "accuracy": 1.0,
+      "revision_rate": 0.0,
+      "formations": 0.0,
+      "resolved": 0.0
+    }
+  },
+  "gwt_recruitment": {
+    "mean_latency_cycles": 2.175,
+    "max_latency_cycles": 5,
+    "total_floor_waste": 0
+  }
+}
