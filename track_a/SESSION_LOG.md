@@ -66,4 +66,30 @@ Design notes worth keeping:
   step early (with the first module test) so those specific tests passed on
   first run; controller, architectures, metrics, validation were red first.
 
-Next: deliverable 4 (grading spec + parser), then 5 (PREREG.md).
+Deliverables 4 and 5 are DONE:
+
+4. Decision parser (conflict/parser.py): last-marked-choice precedence,
+   abstains rather than guesses, round-trips every oracle decision and stance
+   text in a battery by test. GRADING.md pins the judge protocol (Haiku,
+   temp 0, never sees ground truth) and the n=100 hand-graded calibration
+   subset with a kappa 0.8 gate.
+5. PREREG.md: H1 revision (primary, powered .93 at n=72/cell for 40 vs 15
+   percent), H2 recruitment (descriptive), H3 accuracy (secondary), exclusion
+   rules, seeds 10000-10143, and the one command:
+   `.venv/bin/python track_a/run_funded.py --live --i-authorize-spend`
+   Estimate $16.47 + judge, under the $25 target, hard call cap 13,939.
+
+Also built for the funded run (all offline, ScriptedModel-tested):
+- conflict/model_modules.py: ModelModule/ModelController with the pinned
+  SAY/URGENCY/RECOMMEND format; malformed output degrades to unformed
+  stances (biases against H1).
+- Architectures take module/controller factories; oracle defaults unchanged.
+- conflict/funded.py + run_funded.py: battery (seeds disjoint from
+  validation), cost arithmetic, JSON serialization, checkpointing runner over
+  gwbench AnthropicModel (disk cache + hard call cap). Dry run verified;
+  live path double-gated (--live plus --i-authorize-spend plus env key).
+
+DEFINITION OF DONE: met. 62 tests green. A fresh session can run the funded
+experiment with one command and no design decisions left. Blocked only on
+fresh budget authorization from Josh (spend is $107.68 vs $100 authorized;
+nothing runs before the 8/16 abstract per NEXT_EXPERIMENTS.md).
