@@ -45,8 +45,17 @@ class TrialResult:
     module_emits: int = 0
 
 
-def _make_modules(scenario: Scenario, revises: bool) -> dict[str, OracleModule]:
-    return {name: OracleModule(name, scenario, revises=revises) for name in MODULES}
+# Factories let the funded run swap in model-backed modules and controller
+# (conflict/model_modules.py) without touching the loop. Defaults are oracles.
+def _default_module_factory(revises: bool):
+    def factory(name: str, scenario: Scenario):
+        return OracleModule(name, scenario, revises=revises)
+
+    return factory
+
+
+def _make_modules(scenario: Scenario, module_factory) -> dict:
+    return {name: module_factory(name, scenario) for name in MODULES}
 
 
 def _stance_events(stance_history: dict[str, list[Optional[str]]]):
@@ -71,10 +80,11 @@ def _run_cycles(
     feedback: bool,
     capacity_tokens: Optional[int],
     n_cycles: int,
-    revises: bool,
+    module_factory,
+    controller_factory,
 ) -> TrialResult:
-    modules = _make_modules(scenario, revises)
-    controller = OracleController(scenario)
+    modules = _make_modules(scenario, module_factory)
+    controller = controller_factory(scenario)
 
     registry: dict[tuple[str, str], Statement] = {}
     delivered: set[tuple[str, str]] = set()
@@ -144,8 +154,13 @@ def run_gwt(
     capacity_tokens: Optional[int] = DEFAULT_CAPACITY,
     n_cycles: int = DEFAULT_CYCLES,
     revises: bool = True,
+    module_factory=None,
+    controller_factory=OracleController,
 ) -> TrialResult:
-    return _run_cycles(scenario, "gwt", True, capacity_tokens, n_cycles, revises)
+    factory = module_factory or _default_module_factory(revises)
+    return _run_cycles(
+        scenario, "gwt", True, capacity_tokens, n_cycles, factory, controller_factory
+    )
 
 
 def run_hub(
@@ -153,14 +168,23 @@ def run_hub(
     capacity_tokens: Optional[int] = DEFAULT_CAPACITY,
     n_cycles: int = DEFAULT_CYCLES,
     revises: bool = True,
+    module_factory=None,
+    controller_factory=OracleController,
 ) -> TrialResult:
-    return _run_cycles(scenario, "hub", False, capacity_tokens, n_cycles, revises)
+    factory = module_factory or _default_module_factory(revises)
+    return _run_cycles(
+        scenario, "hub", False, capacity_tokens, n_cycles, factory, controller_factory
+    )
 
 
-def run_flat(scenario: Scenario) -> TrialResult:
+def run_flat(
+    scenario: Scenario,
+    module_factory=None,
+    controller_factory=OracleController,
+) -> TrialResult:
     """One pass, no workspace: the 'transformers already do this' baseline."""
-    modules = _make_modules(scenario, revises=True)
-    controller = OracleController(scenario)
+    modules = _make_modules(scenario, module_factory or _default_module_factory(True))
+    controller = controller_factory(scenario)
     everything: list[Statement] = []
     stance_history: dict[str, list[Optional[str]]] = {}
     for name, module in modules.items():
