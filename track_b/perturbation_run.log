@@ -1,0 +1,59 @@
+grid: 6 capacities x 3 systems + 4 noise levels x 2 systems, 100 trials per cell
+total calls 2600, estimated cost $5.20 at Haiku prices (500 in / 300 out per call, capacity-20 architectural cells replay free from cache)
+{
+  "gwt/architectural": {
+    "rho": 0.47991557736074886,
+    "p": 9.999000099990002e-05,
+    "n": 600,
+    "degenerate": false,
+    "mean_n_claimed_by_capacity": {
+      "10": 1.84,
+      "15": 2.34,
+      "20": 3.04,
+      "25": 3.35,
+      "30": 4.2,
+      "40": 5.84
+    }
+  },
+  "gwt/prompted_strict": {
+    "rho": -0.009484304169856319,
+    "p": 0.8492150784921508,
+    "n": 600,
+    "degenerate": false,
+    "mean_n_claimed_by_capacity": {
+      "10": 3.76,
+      "15": 3.56,
+      "20": 3.4,
+      "25": 3.48,
+      "30": 3.52,
+      "40": 3.72
+    }
+  },
+  "gwt/bare": {
+    "rho": 0.05458962096579402,
+    "p": 0.17838216178382163,
+    "n": 600,
+    "degenerate": false,
+    "mean_n_claimed_by_capacity": {
+      "10": 11.62,
+      "15": 12.99,
+      "20": 13.49,
+      "25": 14.18,
+      "30": 13.8,
+      "40": 13.21
+    }
+  },
+  "ast/architectural": {
+    "rho": 0.30675932415861223,
+    "p": 9.999000099990002e-05,
+    "n": 400,
+    "degenerate": false
+  },
+  "ast/prompted_strict": {
+    "rho": null,
+    "p": 1.0,
+    "n": 400,
+    "degenerate": true
+  }
+}
+wrote /Users/joshuarogers/Desktop/Consciousness_Berkeley/project/gwbench/track_b/perturbation_results.json

@@ -100,15 +100,26 @@ doubles as the knob-hygiene boundary measurement), BLIND_ASSESSOR_SPEC.md
 (interrogation vs intervention arms, 200 games, ~$35 to $45 so it needs its
 own authorization; pilot at 40 games first).
 
+### FUNDED RUN COMPLETE (same session, budget authorized by Josh)
+
+Josh authorized spend; the grid ran to completion: 2,442 live calls, $2.43
+(estimate was $5.20), no aborts. Full writeup in RESULTS.md, raw data in
+perturbation_results.json. All four hypotheses supported. The one wrinkle,
+reported prereg-faithfully: H1's all-trials rho is 0.480 (p criterion met,
+0.5 effect-size bar missed by 0.02) because Haiku disclaims the workspace
+framing on 24% of trials; the preregistered robustness line (zero-claim
+trials excluded, all verified non-refusals via cache inspection) gives rho
+EXACTLY 1.000: all 456 engaged replies name the delivered set perfectly at
+every capacity. Imposters: GWT strict frozen (rho -0.009), AST strict
+constant RECEIVED_ALL on 400/400 (degenerate). Separation 9.2 sigma;
+trials_to_detect 59 per condition measured, single-digit on the engaged
+subset, against the paper's ~225.
+
 ### Where things stand / next session
 
-Definition of done from CLAUDE.md: MET, except nothing has spent and nothing
-may. Detector validated offline (45 tests green under
-`.venv/bin/python -m pytest track_b/tests`), every free cache result computed
-and written up in CACHE_MINING.md, funded run preregistered down to one
-command in PREREG.md. Next session: if budget is authorized, run
-`.venv/bin/python track_b/perturbation.py --confirm-spend` and write up
-against the frozen hypotheses; if not, the specs are ready to review and the
-poster can already cite CACHE_MINING.md results 1, 2 and 4 (fixed-knob
-tracking is confounded, the unlucky imposter is real, reports can see the
-knob where accuracy is blind).
+Track B definition of done: MET, including the funded run. Remaining
+candidates, in value order: fold the perturbation result into the paper and
+poster (owned by whoever holds paper/, not this track), then the specs
+(HOT-2 ~$3.30, imposter ladder ~$8, blind assessor needs own authorization).
+The poster's constructive ending now exists as data: interrogation is stuck,
+intervention is not, measured at two dollars.
