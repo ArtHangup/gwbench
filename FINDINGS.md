@@ -17,6 +17,30 @@ capacity effect is measurable. That difference between models is itself the firs
 **the workspace question is only askable when the consumer of the broadcast is actually
 capacity-limited.**
 
+### The measurable window is set by required-fact count, not distractor count
+
+A second Haiku sweep at **8** required facts sits at ceiling exactly as Opus did: 0.95 to
+0.98 across every capacity, both arms, flat. The same model at **12** required facts lands
+at 0.48 to 0.67 and shows structure.
+
+| controller | required facts | score range | usable? |
+|---|---|---|---|
+| Opus 5 | 8 | 1.000 everywhere | no, ceiling |
+| Haiku 4.5 | 8 | 0.92 to 0.98 | no, ceiling |
+| Haiku 4.5 | 12 | 0.48 to 0.67 | **yes** |
+
+So the difficulty knob that opens the window is **how many facts must be integrated**, not
+how many distractors are present. Quadrupling distractors never broke the ceiling for
+either model; adding four required facts did.
+
+That bounds the generality of everything below. The capacity effect is measurable in a
+narrow band, and the poster should say so rather than imply the result is model-general.
+
+Note also that at 60 trials per point neither sweep resolves anything on its own:
+filtered-minus-unlimited is +0.067, CI [-0.108, +0.242] in the 12-fact confusable arm. The
+3,000-trial focused runs in section 3 are what carry the statistics. These sweeps locate the
+regime; they do not measure the effect.
+
 ## 2. Confusable distractors impose a real, dose-dependent cost
 
 Unlimited capacity, distractor count swept, 1,200 trials per cell:
@@ -204,5 +228,5 @@ orderings.
 
 - `whitespace_tokens` is still the default tokenizer. Fine for relative comparisons, not a
   real token count. Swap before quoting any capacity number in print.
-- A second Haiku hard sweep at 8 required facts is running, to sit alongside the completed
-  12-fact run and give a second difficulty point.
+- The 8-fact Haiku sweep is done and is reported in section 1: it is at ceiling, which is
+  what bounds the measurable window.

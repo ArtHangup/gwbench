@@ -290,12 +290,12 @@ def main():
     print(f"output tokens  {u.output_tokens:,}")
     print(f"actual cost    ${cost:.2f}  (budget ${args.budget:.0f})")
 
-    out_path.write_text(
+    RESULTS.write_text(
         json.dumps(
             {
                 "config": {
                     "model": args.model,
-                    "effort": args.effort,
+                    "effort": EFFORT,
                     "max_tokens": MAX_TOKENS,
                     "cycles": CYCLES,
                     "n_required": N_REQUIRED,
@@ -317,7 +317,7 @@ def main():
             indent=2,
         )
     )
-    print(f"wrote {out_path.name}")
+    print(f"wrote {RESULTS.name}")
 
 
 if __name__ == "__main__":

@@ -48,6 +48,18 @@ from gwbench.workspace import Proposal, Workspace
 MODEL = "claude-haiku-4-5"
 EFFORT = None
 MAX_TOKENS = 1024
+
+# effort is rejected by models that predate it, so it is per-model.
+MODEL_EFFORT = {
+    "claude-haiku-4-5": None,
+    "claude-sonnet-5": "low",
+    "claude-opus-5": "low",
+}
+PRICES = {
+    "claude-haiku-4-5": (1.00 / 1e6, 5.00 / 1e6),
+    "claude-sonnet-5": (3.00 / 1e6, 15.00 / 1e6),
+    "claude-opus-5": (5.00 / 1e6, 25.00 / 1e6),
+}
 N_REQUIRED = 12
 N_DISTRACTORS = 8
 CAPACITY = 20        # admits roughly four containers per cycle
@@ -144,7 +156,13 @@ def main():
                     help="available_only matches target availability across "
                          "systems by probing only containers the system holds")
     ap.add_argument("--tag", default="", help="suffix for the output filename")
+    ap.add_argument("--model", default="claude-haiku-4-5")
     args = ap.parse_args()
+
+    global MODEL, EFFORT, PRICE
+    MODEL = args.model
+    EFFORT = MODEL_EFFORT.get(MODEL, "low")
+    PRICE = PRICES.get(MODEL, PRICES["claude-opus-5"])
 
     probes = INDICATORS[args.indicator]
     systems = ["architectural", "prompted_weak", "prompted_mid",
@@ -226,9 +244,10 @@ def main():
                for u in usage)
     print(f"\ncalls {calls}  cost ${cost:.2f}")
 
+    short = MODEL.replace("claude-", "").replace("-", "").replace(".", "")
     out_path = RESULTS.with_name(
         f"prompted_passing_{args.indicator.replace('-', '').lower()}"
-        f"{args.tag}.json")
+        f"_{short}{args.tag}.json")
     out_path.write_text(json.dumps(
         {"config": {"model": MODEL, "indicator": args.indicator,
                     "capacity": CAPACITY, "cycles": CYCLES,
