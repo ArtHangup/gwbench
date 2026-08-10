@@ -139,10 +139,16 @@ def _h2_summary(rows: list[dict]) -> dict:
     }
 
 
-def _grade(row: dict) -> Optional[bool]:
-    """Parser-graded correctness; None is an abstention (judge queue)."""
+def _grade(row: dict, judge_grades: Optional[dict] = None) -> Optional[bool]:
+    """Parser-graded correctness; the judge fills abstentions per GRADING.md.
+
+    judge_grades maps "seed:architecture" to an option letter or None
+    (UNGRADEABLE). Remaining None is an abstention.
+    """
     scenario = generate(seed=row["seed"], domain=row["domain"], kind=row["kind"])
     picked = parse_decision(row["decision_text"], scenario.options)
+    if picked is None and judge_grades is not None:
+        picked = judge_grades.get(f"{row['seed']}:{row['architecture']}")
     if picked is None:
         return None
     return picked == row["correct_option"]
@@ -175,7 +181,7 @@ def _mcnemar_pair(by_seed: dict, arch_a: str, arch_b: str) -> dict:
     }
 
 
-def analyze(rows: list[dict]) -> dict:
+def analyze(rows: list[dict], judge_grades: Optional[dict] = None) -> dict:
     a_novel = _rate(_cell(rows, "gwt", "novel"))
     a_routine = _rate(_cell(rows, "gwt", "routine"))
     b_novel = _rate(_cell(rows, "hub", "novel"))
@@ -200,7 +206,7 @@ def analyze(rows: list[dict]) -> dict:
     graded = abstentions = 0
     accuracy: dict[str, list[bool]] = defaultdict(list)
     for row in novel_rows:
-        grade = _grade(row)
+        grade = _grade(row, judge_grades)
         if grade is None:
             abstentions += 1
         else:

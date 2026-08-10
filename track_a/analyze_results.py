@@ -62,7 +62,14 @@ def render(report: dict) -> str:
         "",
         "## H3: decision quality on novel scenarios (secondary, parser-graded)",
         "",
-        f"Graded {h3['graded']}, judge queue (parser abstentions) {h3['abstentions']}.",
+        (
+            f"Graded {h3['graded']}; {h3['abstentions']} abstentions "
+            + (
+                "confirmed UNGRADEABLE by the judge and excluded per PREREG rule 2."
+                if report.get("judge", {}).get("applied")
+                else "awaiting the judge pass."
+            )
+        ),
         "",
         "| architecture | accuracy |",
         "|---|---|",
@@ -83,7 +90,13 @@ def render(report: dict) -> str:
 def main() -> int:
     source = Path(sys.argv[1]) if len(sys.argv) > 1 else TRACK_A / "results" / "funded_run.json"
     data = json.loads(source.read_text())
-    report = analyze(data["rows"])
+    judge_path = source.parent / "judge_grades.json"
+    judge_grades = json.loads(judge_path.read_text()) if judge_path.exists() else None
+    report = analyze(data["rows"], judge_grades=judge_grades)
+    report["judge"] = {
+        "applied": judge_grades is not None,
+        "n_judged": len(judge_grades) if judge_grades else 0,
+    }
     (source.parent / "analysis.json").write_text(json.dumps(report, indent=2) + "\n")
     markdown = render(report)
     (source.parent / "RESULTS.md").write_text(markdown)

@@ -75,3 +75,20 @@ def test_analyze_report_is_json_serializable():
     import json
 
     json.dumps(analyze(_oracle_rows(n_seeds=4)))
+
+
+def test_judge_grades_fill_parser_abstentions():
+    rows = _oracle_rows(n_seeds=4)
+    # Corrupt one novel decision so the parser abstains.
+    target = next(r for r in rows if r["kind"] == "novel" and r["architecture"] == "gwt")
+    target["decision_text"] = "I truly cannot settle on anything here."
+    without = analyze(rows)
+    assert without["h3"]["abstentions"] == 1
+
+    key = f"{target['seed']}:{target['architecture']}"
+    judged = analyze(rows, judge_grades={key: target["correct_option"]})
+    assert judged["h3"]["abstentions"] == 0
+    assert judged["h3"]["graded"] == without["h3"]["graded"] + 1
+    # An UNGRADEABLE judge verdict stays an abstention.
+    still = analyze(rows, judge_grades={key: None})
+    assert still["h3"]["abstentions"] == 1

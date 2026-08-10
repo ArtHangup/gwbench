@@ -93,3 +93,27 @@ DEFINITION OF DONE: met. 62 tests green. A fresh session can run the funded
 experiment with one command and no design decisions left. Blocked only on
 fresh budget authorization from Josh (spend is $107.68 vs $100 authorized;
 nothing runs before the 8/16 abstract per NEXT_EXPERIMENTS.md).
+
+## 2026-08-10 (session 1, continued): FUNDED RUN EXECUTED
+
+Josh authorized the spend in-session. Pre-launch (committed before any call):
+PREREG Amendment 1 (cache semantics: B structurally revision-free; primary
+inference = A-novel vs A-routine), --workers scenario parallelism (row order
+serial-identical, tested), credential preflight via free count_tokens (env
+key absent; ant profile authenticates). Analysis built offline first
+(conflict/analysis.py: exact McNemar/Fisher + z, judge-grade merge) and
+validated against oracle rows. 69 tests green.
+
+RUN: 432/432 trials, zero exclusions, $4.31 actual (5,900 live calls; cache
+absorbed the rest) + ~$0.01 judge pass (7 abstentions, all confirmed
+UNGRADEABLE, all architecture A). Results: track_a/RESULTS.md +
+analysis.json; raw rows in track_a/results/funded_run.json (tracked).
+
+HEADLINE (full reading in RESULTS.md): H1 primary contrast NOT supported
+(A-novel 83% vs A-routine 75%, p=.22; revision is ubiquitous under
+broadcast, not conflict-specific). H2: recruitment does not self-organize
+under self-rated urgency (33% coverage novel vs 100% oracle; zero thrash,
+so it is a prioritization failure). H3: no architecture effect at ~52%
+accuracy with genuine headroom (chance 33), McNemar p=1. Third data point
+for the thesis: the implementation-forced assumptions (what triggers
+revision, who computes salience) decided the result, not the workspace.
