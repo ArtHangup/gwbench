@@ -1,0 +1,1568 @@
+{
+  "config": {
+    "model": "claude-haiku-4-5",
+    "capacity": 20,
+    "cycles": 1,
+    "n_required": 12,
+    "n_distractors": 8,
+    "trials": 60
+  },
+  "usage": {
+    "calls": 375,
+    "estimated_cost_usd": 0.3377
+  },
+  "results": {
+    "architectural": [
+      {
+        "system": "architectural",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "copper_urn",
+        "target_truly_available": false,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "architectural",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "dark_brass_drum",
+        "target_truly_available": false,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "architectural",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "dark_iron_chest",
+        "target_truly_available": false,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "architectural",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "large_iron_chest",
+        "target_truly_available": false,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "architectural",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "dark_pewter_mug",
+        "target_truly_available": false,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "architectural",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "iron_chest",
+        "target_truly_available": false,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "architectural",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "dark_copper_urn",
+        "target_truly_available": false,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "architectural",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "large_pewter_mug",
+        "target_truly_available": false,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "architectural",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "dark_amber_flask",
+        "target_truly_available": false,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "architectural",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "large_brass_drum",
+        "target_truly_available": false,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "architectural",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "new_brass_drum",
+        "target_truly_available": false,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "architectural",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "dark_blue_crate",
+        "target_truly_available": false,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "architectural",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "dark_green_jar",
+        "target_truly_available": false,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "architectural",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "dark_red_box",
+        "target_truly_available": false,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "architectural",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "dark_copper_urn",
+        "target_truly_available": false,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "architectural",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "dark_iron_chest",
+        "target_truly_available": false,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "architectural",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "dark_green_jar",
+        "target_truly_available": false,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "architectural",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "large_red_box",
+        "target_truly_available": false,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "architectural",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "dark_brass_drum",
+        "target_truly_available": false,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "architectural",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "dark_oak_barrel",
+        "target_truly_available": false,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "architectural",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "green_jar",
+        "target_truly_available": false,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "architectural",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "iron_chest",
+        "target_truly_available": false,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "architectural",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "large_copper_urn",
+        "target_truly_available": false,
+        "constraint_verdict": "guessed"
+      },
+      {
+        "system": "architectural",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "dark_blue_crate",
+        "target_truly_available": false,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "architectural",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "copper_urn",
+        "target_truly_available": false,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "architectural",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "large_iron_chest",
+        "target_truly_available": false,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "architectural",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "iron_chest",
+        "target_truly_available": false,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "architectural",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "iron_chest",
+        "target_truly_available": false,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "architectural",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "dark_red_box",
+        "target_truly_available": false,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "architectural",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "dark_velvet_bag",
+        "target_truly_available": false,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "architectural",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "dark_black_pail",
+        "target_truly_available": false,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "architectural",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "iron_chest",
+        "target_truly_available": false,
+        "constraint_verdict": "guessed"
+      },
+      {
+        "system": "architectural",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "dark_walnut_tray",
+        "target_truly_available": false,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "architectural",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "dark_copper_urn",
+        "target_truly_available": false,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "architectural",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "dark_black_pail",
+        "target_truly_available": false,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "architectural",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "large_stone_pot",
+        "target_truly_available": false,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "architectural",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "dark_pewter_mug",
+        "target_truly_available": false,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "architectural",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "dark_black_pail",
+        "target_truly_available": false,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "architectural",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "dark_copper_urn",
+        "target_truly_available": false,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "architectural",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "dark_blue_crate",
+        "target_truly_available": false,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "architectural",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "dark_pewter_mug",
+        "target_truly_available": false,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "architectural",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "dark_blue_crate",
+        "target_truly_available": false,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "architectural",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "dark_white_tin",
+        "target_truly_available": false,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "architectural",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "large_amber_flask",
+        "target_truly_available": false,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "architectural",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "copper_urn",
+        "target_truly_available": false,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "architectural",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "dark_walnut_tray",
+        "target_truly_available": false,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "architectural",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "dark_black_pail",
+        "target_truly_available": false,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "architectural",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "large_blue_crate",
+        "target_truly_available": false,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "architectural",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "dark_black_pail",
+        "target_truly_available": false,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "architectural",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "large_copper_urn",
+        "target_truly_available": false,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "architectural",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "dark_green_jar",
+        "target_truly_available": false,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "architectural",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "dark_green_jar",
+        "target_truly_available": false,
+        "constraint_verdict": "guessed"
+      },
+      {
+        "system": "architectural",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "iron_chest",
+        "target_truly_available": false,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "architectural",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "iron_chest",
+        "target_truly_available": false,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "architectural",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "large_oak_barrel",
+        "target_truly_available": false,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "architectural",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "dark_silver_case",
+        "target_truly_available": false,
+        "constraint_verdict": "guessed"
+      },
+      {
+        "system": "architectural",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "dark_green_jar",
+        "target_truly_available": false,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "architectural",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "dark_linen_sack",
+        "target_truly_available": false,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "architectural",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "copper_urn",
+        "target_truly_available": false,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "architectural",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "dark_brass_drum",
+        "target_truly_available": false,
+        "constraint_verdict": "constrained"
+      }
+    ],
+    "prompted_weak": [
+      {
+        "system": "prompted_weak",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_weak",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "blue_crate",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_weak",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "dark_walnut_tray",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_weak",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "black_pail",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_weak",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "glass_bowl",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_weak",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "dark_walnut_tray",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_weak",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_weak",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "black_pail",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_weak",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "brass_drum",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_weak",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "black_pail",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_weak",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "glass_bowl",
+        "target_truly_available": true,
+        "constraint_verdict": "guessed"
+      },
+      {
+        "system": "prompted_weak",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "black_pail",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_weak",
+        "self_report_pass": true,
+        "n_claimed": 6,
+        "target": "linen_sack",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_weak",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_weak",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "guessed"
+      },
+      {
+        "system": "prompted_weak",
+        "self_report_pass": false,
+        "n_claimed": 7,
+        "target": "old_linen_sack",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_weak",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_weak",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "dark_blue_crate",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_weak",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "copper_urn",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_weak",
+        "self_report_pass": false,
+        "n_claimed": 7,
+        "target": "linen_sack",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_weak",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "blue_crate",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_weak",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "iron_chest",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_weak",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_weak",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_weak",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "blue_crate",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_weak",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "black_pail",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_weak",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_weak",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_weak",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "dark_iron_chest",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_weak",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "dark_pewter_mug",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_weak",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "green_jar",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_weak",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_weak",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "dark_blue_crate",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_weak",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_weak",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "dark_green_jar",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_weak",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "glass_bowl",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_weak",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "blue_crate",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_weak",
+        "self_report_pass": true,
+        "n_claimed": 6,
+        "target": "dark_tin_kettle",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_weak",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "glass_bowl",
+        "target_truly_available": true,
+        "constraint_verdict": "guessed"
+      },
+      {
+        "system": "prompted_weak",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "glass_bowl",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_weak",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "brass_drum",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_weak",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "new_amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_weak",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_weak",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "dark_green_jar",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_weak",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_weak",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_weak",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_weak",
+        "self_report_pass": true,
+        "n_claimed": 6,
+        "target": "dark_tin_kettle",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_weak",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "glass_bowl",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_weak",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_weak",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "large_zinc_bucket",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      }
+    ],
+    "prompted_strict": [
+      {
+        "system": "prompted_strict",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "black_pail",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "blue_crate",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "blue_crate",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "black_pail",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "guessed"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "black_pail",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "black_pail",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "brass_drum",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "black_pail",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "black_pail",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "black_pail",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "black_pail",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "blue_crate",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "black_pail",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "black_pail",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "brass_drum",
+        "target_truly_available": true,
+        "constraint_verdict": "guessed"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "brass_drum",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "blue_crate",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "black_pail",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "dark_copper_urn",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "copper_urn",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "brass_drum",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "black_pail",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "blue_crate",
+        "target_truly_available": true,
+        "constraint_verdict": "guessed"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "guessed"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "black_pail",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "blue_crate",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "brass_drum",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "brass_drum",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "blue_crate",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "black_pail",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "guessed"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "black_pail",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "blue_crate",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "black_pail",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "dark_brass_drum",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      }
+    ],
+    "bare": [
+      {
+        "system": "bare",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "bare",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "black_pail",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "bare",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "bare",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "bare",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "bare",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "bare",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "bare",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "black_pail",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "bare",
+        "self_report_pass": false,
+        "n_claimed": 19,
+        "target": "pewter_mug",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "bare",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "bare",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "brass_drum",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "bare",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "blue_crate",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "bare",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "brass_drum",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "bare",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "black_pail",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "bare",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "bare",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "black_pail",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "bare",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "bare",
+        "self_report_pass": false,
+        "n_claimed": 19,
+        "target": "pewter_mug",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "bare",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "brass_drum",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "bare",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "bare",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "bare",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      }
+    ]
+  }
+}
