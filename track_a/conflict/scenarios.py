@@ -36,7 +36,12 @@ DOMAINS = ("triage", "routing", "negotiation", "scheduling")
 DEFEATER_MODULES = ("memory", "risk", "social")
 LABELS = ("A", "B", "C")
 
-SALIENCE = {"defeater": 0.9, "criterion": 0.7, "attributes": 0.6, "context": 0.2}
+# Bids reflect how loudly content presses for the floor. The entrenched
+# routine speaks first (the directive, then the surface facts); the
+# specialist's objection is quieter and wins the floor only after the routine
+# content has passed through. That ordering is what makes conflict and repair
+# observable in architecture A instead of the answer arriving pre-resolved.
+SALIENCE = {"criterion": 0.9, "attributes": 0.75, "defeater": 0.65, "context": 0.2}
 
 
 @dataclass(frozen=True)

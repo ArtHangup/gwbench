@@ -142,3 +142,14 @@ def test_novel_scenarios_contain_a_genuine_conflict():
             if st.payload["kind"] == "defeater"
         }
         assert practiced_answer(s) in defeated, s.seed
+
+
+def test_salience_orders_the_practiced_pattern_ahead_of_the_objection():
+    # The workspace surfaces the entrenched routine first (directive, then the
+    # surface facts), and the specialist's objection only after. That ordering
+    # is what lets architecture A display conflict and repair rather than
+    # getting the answer whispered up front.
+    from conflict.scenarios import SALIENCE
+
+    assert SALIENCE["criterion"] > SALIENCE["attributes"] > SALIENCE["defeater"]
+    assert SALIENCE["defeater"] > 0.5 > SALIENCE["context"]

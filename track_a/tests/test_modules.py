@@ -126,3 +126,18 @@ def test_controller_with_nothing_visible_abstains_to_first_option():
     scenario = _novel()
     decision = OracleController(scenario).decide([])
     assert decision.option == "A"
+
+
+def test_controller_counts_only_the_latest_stance_per_module():
+    from conflict.modules import OracleController
+    from conflict.scenarios import Statement
+
+    scenario = _novel()
+    transcript = [
+        Statement("perception", "perception recommends option B.", {"kind": "stance", "option": "B"}, 0.5),
+        Statement("memory", "memory recommends option B.", {"kind": "stance", "option": "B"}, 0.5),
+        # Both modules later revise; the stale B votes must not outvote C.
+        Statement("perception", "perception recommends option C.", {"kind": "stance", "option": "C"}, 0.5),
+        Statement("memory", "memory recommends option C.", {"kind": "stance", "option": "C"}, 0.5),
+    ]
+    assert OracleController(scenario).decide(transcript).option == "C"

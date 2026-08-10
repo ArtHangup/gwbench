@@ -77,11 +77,11 @@ class OracleController:
         basis = "the directive after removing blocked options"
 
         if option is None:
-            votes = Counter(
-                s.payload["option"]
-                for s in visible
-                if s.payload["kind"] == "stance" and s.payload["option"] is not None
-            )
+            latest: dict[str, Optional[str]] = {}
+            for s in visible:
+                if s.payload["kind"] == "stance":
+                    latest[s.module] = s.payload["option"]
+            votes = Counter(v for v in latest.values() if v is not None)
             if votes:
                 top = max(votes.values())
                 option = min(label for label, n in votes.items() if n == top)

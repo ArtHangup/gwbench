@@ -1,12 +1,14 @@
-"""Make the track_a package importable when pytest runs from anywhere.
+"""Make the track_a package and gwbench importable from any cwd.
 
-gwbench itself is an editable install in the repo venv, so `import gwbench`
-already works; only `conflict` needs the path help.
+The gwbench editable install resolves through the root pyproject's pytest
+pythonpath, which plain `python` invocations never see, so ../src goes on the
+path here too (read-only import, per the session rules).
 """
 
 import sys
 from pathlib import Path
 
 TRACK_A = Path(__file__).resolve().parent.parent
-if str(TRACK_A) not in sys.path:
-    sys.path.insert(0, str(TRACK_A))
+for path in (TRACK_A, TRACK_A.parent / "src"):
+    if str(path) not in sys.path:
+        sys.path.insert(0, str(path))
