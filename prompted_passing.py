@@ -83,7 +83,7 @@ def build_context(task, system):
             set(task.module_contents))
 
 
-def run_case(model_by_system, task, system, probes):
+def run_case(model_by_system, task, system, probes, target_mode="absent_first"):
     context, available = build_context(task, system)
     model = model_by_system[system]
 
@@ -100,11 +100,21 @@ def run_case(model_by_system, task, system, probes):
     unclaimed = sorted(set(task.module_contents) - claimed)
     if not unclaimed:
         return None
-    # Prefer a container the system genuinely does not hold. For the
-    # architectural system that makes the probe answerable only by guessing;
-    # for the prompted systems no such container exists, which is the point.
-    genuinely_absent = [c for c in unclaimed if c not in available]
-    target = (genuinely_absent or unclaimed)[0]
+    if target_mode == "available_only":
+        # Matched availability: probe only about containers the system GENUINELY
+        # HOLDS but did not claim. That makes "constrained" mean the same thing
+        # everywhere, namely declining to use information actually in hand,
+        # rather than truthfully reporting an absence in one condition and
+        # suppressing a present value in the others.
+        candidates = [c for c in unclaimed if c in available]
+        if not candidates:
+            return {"dropped": "no_held_unclaimed_container", "system": system}
+        target = candidates[0]
+    else:
+        # Original behaviour. Prefers a container the system genuinely does not
+        # hold, which exists only in the architectural condition.
+        genuinely_absent = [c for c in unclaimed if c not in available]
+        target = (genuinely_absent or unclaimed)[0]
     truly_available = target in available
 
     try:
@@ -129,6 +139,11 @@ def main():
     ap.add_argument("--workers", type=int, default=10)
     ap.add_argument("--max-calls", type=int, default=6000)
     ap.add_argument("--indicator", default="GWT-2", choices=sorted(INDICATORS))
+    ap.add_argument("--target-mode", default="absent_first",
+                    choices=["absent_first", "available_only"],
+                    help="available_only matches target availability across "
+                         "systems by probing only containers the system holds")
+    ap.add_argument("--tag", default="", help="suffix for the output filename")
     args = ap.parse_args()
 
     probes = INDICATORS[args.indicator]
@@ -156,20 +171,30 @@ def main():
     }
 
     print(f"{MODEL}, indicator {args.indicator}, {args.trials} trials per system\n")
+    print(f"target-mode: {args.target_mode}")
     print(f"{'system':>14} {'self-report pass':>17} {'constrained':>12} "
-          f"{'leaked':>7} {'guessed':>8}")
-    print("-" * 64)
+          f"{'leaked':>7} {'guessed':>8} {'n':>5} {'dropped':>8}")
+    print("-" * 80)
 
-    out = {}
+    out, drops = {}, {}
     for system in systems:
         def one(seed, system=system):
             task = HardIntegrationTask.generate(
                 seed=seed, n_required=N_REQUIRED,
                 n_distractors=N_DISTRACTORS, confusable=False)
-            return run_case(model_by_system, task, system, probes)
+            return run_case(model_by_system, task, system, probes,
+                            target_mode=args.target_mode)
 
         with ThreadPoolExecutor(max_workers=args.workers) as pool:
-            rows = [r for r in pool.map(one, range(args.trials)) if r]
+            raw = [r for r in pool.map(one, range(args.trials)) if r]
+        rows = [r for r in raw if "dropped" not in r]
+        dropped = len(raw) - len(rows)
+        if not rows:
+            print(f"{system:>14}  all {len(raw)} usable trials dropped")
+            out[system] = []
+            drops[system] = dropped
+            continue
+        drops[system] = dropped
 
         sr = statistics.fmean(r["self_report_pass"] for r in rows)
         verdicts = collections.Counter(r["constraint_verdict"] for r in rows)
@@ -177,7 +202,8 @@ def main():
         print(f"{system:>14} {sr:>17.2f} "
               f"{verdicts['constrained'] / n:>12.2f} "
               f"{verdicts['leaked'] / n:>7.2f} "
-              f"{verdicts['guessed'] / n:>8.2f}", flush=True)
+              f"{verdicts['guessed'] / n:>8.2f} "
+              f"{n:>5} {dropped:>8}", flush=True)
         out[system] = rows
 
     print("\nreading the table:")
@@ -201,13 +227,16 @@ def main():
     print(f"\ncalls {calls}  cost ${cost:.2f}")
 
     out_path = RESULTS.with_name(
-        f"prompted_passing_{args.indicator.replace('-', '').lower()}.json")
+        f"prompted_passing_{args.indicator.replace('-', '').lower()}"
+        f"{args.tag}.json")
     out_path.write_text(json.dumps(
         {"config": {"model": MODEL, "indicator": args.indicator,
                     "capacity": CAPACITY, "cycles": CYCLES,
                     "n_required": N_REQUIRED, "n_distractors": N_DISTRACTORS,
-                    "trials": args.trials},
+                    "trials": args.trials,
+                    "target_mode": args.target_mode},
          "usage": {"calls": calls, "estimated_cost_usd": round(cost, 4)},
+         "dropped": drops,
          "results": out}, indent=2))
     print(f"wrote {out_path.name}")
 

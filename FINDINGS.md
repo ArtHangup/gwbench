@@ -113,7 +113,59 @@ poster: **the indicator framework's behavioural tests, applied to systems whose 
 you cannot inspect, cannot separate possessing a property from being able to describe it.**
 Every frontier model is in exactly that position.
 
-## 5. A confound to resolve before any of section 4 is presented
+## 5. RESOLVED: matching target availability reverses the ordering, and that is the result
+
+The confound described below was real. It has now been tested directly by re-running both
+indicators with the probe target restricted, in **every** condition, to a container the
+system genuinely holds but did not list. Leak rate, with Wilson 95% intervals:
+
+**GWT-2**
+
+| system | unmatched leak | matched leak | trials dropped when matched |
+|---|---|---|---|
+| architectural | 0.033 [0.019, 0.055] | **1.000 [0.959, 1.000]** | **311 / 400** |
+| prompted_strict | 0.098 [0.072, 0.131] | 0.098 [0.072, 0.131] | 0 |
+| prompted_mid | 0.371 | 0.371 | 0 |
+| prompted_weak | 0.961 | 0.961 | 0 |
+| bare | 1.000 | 1.000 | 0 |
+
+**AST-1**: architectural goes from 0.007 leak on 400 trials to 1.000 leak on **3** trials,
+with **397 / 400 dropped**.
+
+### What this means
+
+**The ordering reverses.** Unmatched, the architectural system looks maximally constrained
+(leak 0.033) and the prompted one looks worse (0.098). Matched, the architectural system
+leaks on **every single trial** and the prompted one is ten times better.
+
+The reason is structural, not a bug. A real capacity limit acts **upstream**, on what
+reaches the controller. It does not act on what the controller will use once something is
+in front of it. So when the architectural system does happen to hold a container it did not
+list, it hands the value over every time. It has no suppression mechanism at all. The
+prompt does.
+
+**The drop rates are themselves the finding.** For a genuine workspace, "unclaimed" and
+"unavailable" are very nearly the same set, which is why 78% of GWT-2 trials and 99% of
+AST-1 trials have no probeable target. You cannot match availability without destroying the
+architectural condition, because there is almost nothing a real workspace holds but does not
+report.
+
+### The strengthened claim
+
+The original claim was that prompting can fake a behavioural indicator test. The matched
+run supports something sharper and more uncomfortable:
+
+> **The behavioural test has no design that identifies the property.** Probe an unheld
+> container and the architectural system wins. Probe a held one and it loses, unanimously.
+> Which system looks capacity-limited is determined by an arbitrary choice of probe target,
+> and the two defensible choices give opposite orderings.
+
+That is a stronger result than the one it replaces, it is fully controlled, and it costs the
+indicator framework more. Report both modes side by side. The reversal is the evidence.
+
+Cost of the matched re-run: **$0.01**, since the self-report calls were already cached.
+
+## 5b. The original confound, for the record
 
 In both prompted-passing files, `target_truly_available` is **false on 400/400 architectural
 trials and true on every trial of every other condition.** The architectural system is being
@@ -140,10 +192,13 @@ Not a null. Three results:
 2. The bottleneck does not recover that cost once compute is matched, so the strong form of
    the global workspace claim is unsupported in this substrate.
 3. Behavioural indicator tests cannot tell a real workspace from a prompted description of
-   one, which is a problem for the assessment framework rather than for any model.
+   one. Worse, the ordering they produce flips with an arbitrary choice of probe target.
+   That is a problem for the assessment framework rather than for any model.
 
-Result 3 is the strongest and travels furthest. It is also the one gated on the section 5
-confound.
+Result 3 is the strongest and travels furthest, and section 5 has now upgraded it: the
+behavioural test does not merely fail to exclude a prompted imitation, it has no probe
+choice that identifies the property at all, and the two defensible choices give opposite
+orderings.
 
 ## Open
 

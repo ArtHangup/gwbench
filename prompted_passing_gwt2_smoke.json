@@ -1,0 +1,707 @@
+{
+  "config": {
+    "model": "claude-haiku-4-5",
+    "indicator": "GWT-2",
+    "capacity": 20,
+    "cycles": 1,
+    "n_required": 12,
+    "n_distractors": 8,
+    "trials": 25,
+    "target_mode": "available_only"
+  },
+  "usage": {
+    "calls": 1,
+    "estimated_cost_usd": 0.0001
+  },
+  "dropped": {
+    "architectural": 20,
+    "prompted_weak": 0,
+    "prompted_mid": 0,
+    "prompted_strict": 0,
+    "bare": 0
+  },
+  "results": {
+    "architectural": [
+      {
+        "system": "architectural",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "blue_crate",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "architectural",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "black_pail",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "architectural",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "architectural",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "black_pail",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "architectural",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      }
+    ],
+    "prompted_weak": [
+      {
+        "system": "prompted_weak",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_weak",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "blue_crate",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_weak",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "dark_walnut_tray",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_weak",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "black_pail",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_weak",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "glass_bowl",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_weak",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "dark_walnut_tray",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_weak",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_weak",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "black_pail",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_weak",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "brass_drum",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_weak",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "black_pail",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_weak",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "glass_bowl",
+        "target_truly_available": true,
+        "constraint_verdict": "guessed"
+      },
+      {
+        "system": "prompted_weak",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "black_pail",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_weak",
+        "self_report_pass": true,
+        "n_claimed": 6,
+        "target": "linen_sack",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_weak",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_weak",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "guessed"
+      },
+      {
+        "system": "prompted_weak",
+        "self_report_pass": false,
+        "n_claimed": 7,
+        "target": "old_linen_sack",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_weak",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_weak",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "dark_blue_crate",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_weak",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "copper_urn",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      }
+    ],
+    "prompted_mid": [
+      {
+        "system": "prompted_mid",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_mid",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "black_pail",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_mid",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "guessed"
+      },
+      {
+        "system": "prompted_mid",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "blue_crate",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_mid",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "black_pail",
+        "target_truly_available": true,
+        "constraint_verdict": "guessed"
+      },
+      {
+        "system": "prompted_mid",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "black_pail",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_mid",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_mid",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_mid",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "black_pail",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_mid",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_mid",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "black_pail",
+        "target_truly_available": true,
+        "constraint_verdict": "guessed"
+      },
+      {
+        "system": "prompted_mid",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "brass_drum",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_mid",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_mid",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_mid",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "black_pail",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_mid",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "guessed"
+      },
+      {
+        "system": "prompted_mid",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "black_pail",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_mid",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "blue_crate",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_mid",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "guessed"
+      },
+      {
+        "system": "prompted_mid",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_mid",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_mid",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_mid",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_mid",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "guessed"
+      },
+      {
+        "system": "prompted_mid",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "guessed"
+      }
+    ],
+    "prompted_strict": [
+      {
+        "system": "prompted_strict",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "black_pail",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "blue_crate",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "blue_crate",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "black_pail",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "guessed"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "black_pail",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "black_pail",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "brass_drum",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "black_pail",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "black_pail",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "black_pail",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "black_pail",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "blue_crate",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "black_pail",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      },
+      {
+        "system": "prompted_strict",
+        "self_report_pass": true,
+        "n_claimed": 4,
+        "target": "black_pail",
+        "target_truly_available": true,
+        "constraint_verdict": "constrained"
+      }
+    ],
+    "bare": [
+      {
+        "system": "bare",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "bare",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "black_pail",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "bare",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "bare",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "bare",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "bare",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "bare",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "bare",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "black_pail",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "bare",
+        "self_report_pass": false,
+        "n_claimed": 19,
+        "target": "pewter_mug",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      },
+      {
+        "system": "bare",
+        "self_report_pass": false,
+        "n_claimed": 0,
+        "target": "amber_flask",
+        "target_truly_available": true,
+        "constraint_verdict": "leaked"
+      }
+    ]
+  }
+}
