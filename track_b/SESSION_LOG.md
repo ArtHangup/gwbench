@@ -73,3 +73,19 @@ CACHE_MINING.md. Four headline results, all free:
 Missing, stated in CACHE_MINING.md: architectural reports off capacity 20,
 any attention-noise cells with reports, imposter reports under a moved knob,
 HOT-2 confidence data.
+
+### Deliverable 4 DONE: PREREG.md and the one-command runner
+
+track_b/perturbation.py plus 9 tests. The whole pipeline validated offline by
+injecting scripted models: an honest model separates from a static one end to
+end (rho > 0.9 vs degenerate), the AST arm's miss reports track noise, and the
+dry run prints the plan without constructing a client. Grid: 6 capacities x 3
+systems + 4 noise levels x 2 systems, 100/cell, 2,600 calls, estimated $5.20,
+hard cap at 110%. Design decisions that came out of this session's work:
+randomized trial order (unlucky-imposter lesson), architectural seeds reused
+across settings for pairing, imposter seeds fresh per setting so the response
+cache cannot manufacture frozen reports, refusals recorded as empty reports
+rather than dropped. Known limitation filed in HARNESS_REQUESTS.md: tied
+saliences make the AST dose-response step-shaped; prereg H3 is stated as a
+step contrast. NOTHING RUNS without --confirm-spend plus fresh budget
+authorization from Josh.
