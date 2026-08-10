@@ -1,6 +1,6 @@
 .venv/
 __pycache__/
-*.pyc
 *.egg-info/
+.pytest_cache/
+# 180MB of cached model responses; available on request or as a release asset
 .api_cache/
-.cache/

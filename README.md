@@ -1,16 +1,43 @@
 # gwbench
 
-A testbed for computational theories of consciousness. Currently implements the
-bandwidth sweep described in `../PLAN.md`.
+An executable test harness for consciousness indicator properties on
+language-model agents, and the experiments behind the preprint
+**"Measurement Is the Hard Part: Testing a Global Workspace Indicator Property
+on Language-Model Agents"** ([paper/main.pdf](paper/main.pdf), LaTeX source in
+[paper/](paper/)).
 
 **This does not simulate consciousness and makes no claim about experience.** It tests
 whether specific functional claims made by theories of consciousness hold up when
-implemented.
+implemented, and whether the behavioral tests themselves can be passed by systems
+that lack the property (they can; see the paper).
+
+## Reproducing the paper
+
+Every reported number comes from a script in this directory, and every script
+writes per-trial JSON (included in the repo):
+
+| Script | Produces | Paper section |
+|---|---|---|
+| `run_real_sweep.py` | pilot sweep | 4.1 |
+| `run_hard_sweep.py` | ceiling result + regime search | 4.1 |
+| `focused_test.py` | repetition confound pair | 4.2 |
+| `dose_response.py` | confirmatory dose-response | 4.3 |
+| `prompted_passing.py` | prompted-passing grid, both probe modes | 5 |
+| `paper/make_figures.py` | all figures, from the JSONs | figures |
+
+Live runs need `pip install anthropic` and an Anthropic API key (or an
+`ant auth login` profile). The 180MB response cache that replays every call at
+zero cost is not in the repo; it is available on request and will be attached
+as a release asset. The oracle demos and the 322-test suite run with no key:
+
+```bash
+python3 -m venv .venv && .venv/bin/pip install -e . pytest
+.venv/bin/python -m pytest -q
+```
 
 ## Quick start
 
 ```bash
-cd ~/Desktop/Consciousness_Berkeley/project/gwbench
 .venv/bin/python -m pytest -q
 ```
 
@@ -38,7 +65,7 @@ step is required either.
 | `anthropic_model.py` | Real API adapter: disk cache, call cap, usage accounting | Done |
 | `sweep.py` | Runs identical tasks at every capacity, averages trials | Done |
 
-282 tests. The capacity invariant is checked at every capacity from 0 to 64, not just at
+322 tests. The capacity invariant is checked at every capacity from 0 to 64, not just at
 a few sample points, because a leak at one value would appear as a single spurious point
 on the curve and would be nearly impossible to spot in a plot.
 
@@ -337,3 +364,9 @@ handle, and the headline result would be wrong. Run it first.
 **Tokenization is injectable.** `whitespace_tokens` is the default. Swap in a real
 tokenizer before quoting any token number in a paper; whitespace counts are fine for
 relative comparisons but are not real token counts.
+
+## License and citation
+
+MIT license. If you use the harness or results, cite the preprint in
+[paper/](paper/). Experiments, analysis, and drafting were carried out in
+collaboration with Claude (Anthropic); see the paper's acknowledgments.

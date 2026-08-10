@@ -1,6 +1,7 @@
 # gwbench findings
 
-Consolidated 2026-08-01 across all completed runs, roughly $53 of API spend. Numbers below
+Consolidated 2026-08-01 across all completed runs. Where wording here differs from
+the manuscript in `paper/`, the manuscript is canonical, roughly $53 of API spend. Numbers below
 are recomputed from the raw JSON, with 95% CIs, not taken from any earlier summary.
 
 ---
@@ -41,7 +42,7 @@ filtered-minus-unlimited is +0.067, CI [-0.108, +0.242] in the 12-fact confusabl
 3,000-trial focused runs in section 3 are what carry the statistics. These sweeps locate the
 regime; they do not measure the effect.
 
-## 2. Confusable distractors impose a real, dose-dependent cost
+## 2. The arm gap is real and dose-dependent, and the control arm produces it
 
 Unlimited capacity, distractor count swept, 1,200 trials per cell:
 
@@ -53,10 +54,12 @@ Unlimited capacity, distractor count swept, 1,200 trials per cell:
 | 24 | 0.635 | 0.691 | -0.056 |
 | 48 | 0.601 | 0.745 | **-0.144** |
 
-Clean and monotonic past 6. Note what the control does: adding **non**-confusable
-distractors *improves* performance, 0.627 to 0.745. More context helps when it is easy to
-reject. Confusable distractors hold the score flat instead. The 14-point gap at 48 is the
-interference effect, and it is real.
+The gap is clean and monotonic past 6, but read it carefully: it is produced by the
+control arm *rising* (0.627 to 0.745; adding easily-rejected context helps), while the
+confusable arm stays flat across the whole dose range (Cochran-Armitage trend p = 0.13).
+Confusable content does not impose a cost; it forfeits a benefit that easily-rejected
+content provides. Those are different claims, and only the second survives. The 14-point
+arm gap at 48 is real, and that is what it is made of.
 
 ## 3. Does a capacity limit recover that cost? Not once compute is matched
 
