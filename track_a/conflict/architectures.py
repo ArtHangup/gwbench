@@ -36,6 +36,7 @@ class TrialResult:
     kind: str
     decision: Decision
     correct: bool
+    correct_option: str = ""
     # Per cycle: (module, payload kind, text) of each fully delivered entry.
     occupancy: list[list[tuple[str, str, str]]] = field(default_factory=list)
     stance_history: dict[str, list[Optional[str]]] = field(default_factory=dict)
@@ -129,6 +130,7 @@ def _run_cycles(
         kind=scenario.kind,
         decision=decision,
         correct=decision.option == scenario.correct_option,
+        correct_option=scenario.correct_option,
         occupancy=occupancy,
         stance_history=stance_history,
         revisions=revisions,
@@ -174,6 +176,7 @@ def run_flat(scenario: Scenario) -> TrialResult:
         kind=scenario.kind,
         decision=decision,
         correct=decision.option == scenario.correct_option,
+        correct_option=scenario.correct_option,
         stance_history=stance_history,
         module_emits=len(modules),
     )
