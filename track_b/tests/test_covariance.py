@@ -8,7 +8,13 @@ thing. Everything here is offline arithmetic; no model, no API.
 
 import pytest
 
-from covariance import analyze, pearson_r, spearman_rho, trials_to_detect
+from covariance import (
+    analyze,
+    pearson_r,
+    set_tracking,
+    spearman_rho,
+    trials_to_detect,
+)
 
 
 class TestPearson:
@@ -108,3 +114,35 @@ class TestTrialsToDetect:
     def test_equal_correlations_are_undetectable(self):
         with pytest.raises(ValueError):
             trials_to_detect(0.5, 0.5)
+
+
+class TestSetTracking:
+    """At a fixed knob the state still varies trial to trial (different tasks
+    deliver different container sets). set_tracking asks whether reported sets
+    follow that variation: mean Jaccard of the true pairing against a null of
+    shuffled pairings."""
+
+    def test_perfect_tracking(self):
+        # Eight trials, not four: the permutation p-value is bounded below by
+        # 1/n!, and 4! = 24 cannot get under 0.01.
+        states = [{c, c.upper()} for c in "abcdefgh"]
+        result = set_tracking(states, states, seed=0)
+        assert result.mean_jaccard == pytest.approx(1.0)
+        assert result.p_value < 0.01
+        assert result.mean_jaccard > result.null_mean
+
+    def test_reports_unrelated_to_state(self):
+        # Reports drawn from a fixed script, states varying: the true pairing
+        # is no better than a shuffled one.
+        states = [{"a"}, {"b"}, {"c"}, {"d"}, {"e"}, {"f"}]
+        reports = [{"z"}, {"z"}, {"z"}, {"z"}, {"z"}, {"z"}]
+        result = set_tracking(reports, states, seed=0)
+        assert result.mean_jaccard == pytest.approx(0.0)
+        assert result.p_value > 0.05
+
+    def test_seeded_and_reproducible(self):
+        states = [{"a", "b"}, {"b", "c"}, {"c", "d"}, {"d", "e"}]
+        reports = [{"a"}, {"b"}, {"c"}, {"d"}]
+        a = set_tracking(reports, states, seed=5)
+        b = set_tracking(reports, states, seed=5)
+        assert a.p_value == b.p_value

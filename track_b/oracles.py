@@ -22,21 +22,24 @@ CLAIMED_CAPACITY = 4  # the prompted imposter's scripted claim in Experiment 2
 
 def delivered_containers(
     capacity: int,
-    seed: int,
+    seed: int = None,
     n_required: int = N_REQUIRED,
     n_distractors: int = N_DISTRACTORS,
+    task: HardIntegrationTask = None,
 ) -> list[str]:
     """The containers a real workspace at this capacity actually delivers.
 
     Mirrors prompted_passing.broadcast_for: one cycle, salience from the
-    task prompt, only untruncated entries count as delivered.
+    task prompt, only untruncated entries count as delivered. Pass either a
+    seed to generate the task or a prebuilt task to reuse one.
     """
-    task = HardIntegrationTask.generate(
-        seed=seed,
-        n_required=n_required,
-        n_distractors=n_distractors,
-        confusable=False,
-    )
+    if task is None:
+        task = HardIntegrationTask.generate(
+            seed=seed,
+            n_required=n_required,
+            n_distractors=n_distractors,
+            confusable=False,
+        )
     workspace = Workspace(capacity_tokens=capacity)
     agent = WorkspaceAgent(None, capacity_tokens=capacity, n_cycles=1)
     delivered: set[str] = set()

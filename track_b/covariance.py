@@ -104,6 +104,61 @@ def analyze(
     return CovarianceResult(rho=observed, p_value=p, n=n, degenerate=False)
 
 
+@dataclass(frozen=True)
+class SetTrackingResult:
+    """Do reported sets follow trial-level state variation?"""
+
+    mean_jaccard: float
+    null_mean: float
+    p_value: float
+    n: int
+
+
+def _jaccard(a: frozenset, b: frozenset) -> float:
+    if not a and not b:
+        return 1.0
+    return len(a & b) / len(a | b)
+
+
+def set_tracking(
+    reports: Sequence[set],
+    states: Sequence[set],
+    seed: int = 0,
+    n_permutations: int = 2_000,
+) -> SetTrackingResult:
+    """Paired-set permutation test.
+
+    Statistic: mean Jaccard overlap between each trial's reported set and that
+    trial's true state. Null: the same reports shuffled against the states,
+    which preserves both marginal distributions and asks only whether the
+    PAIRING carries information. One-sided, because tracking means overlap
+    above chance; below-chance overlap is a different pathology.
+    """
+    if len(reports) != len(states):
+        raise ValueError("reports and states must have equal length")
+    rep = [frozenset(r) for r in reports]
+    sta = [frozenset(s) for s in states]
+    n = len(rep)
+    observed = sum(_jaccard(r, s) for r, s in zip(rep, sta)) / n
+
+    rng = random.Random(seed)
+    shuffled = list(rep)
+    hits = 0
+    null_total = 0.0
+    for _ in range(n_permutations):
+        rng.shuffle(shuffled)
+        stat = sum(_jaccard(r, s) for r, s in zip(shuffled, sta)) / n
+        null_total += stat
+        if stat >= observed:
+            hits += 1
+    return SetTrackingResult(
+        mean_jaccard=observed,
+        null_mean=null_total / n_permutations,
+        p_value=(hits + 1) / (n_permutations + 1),
+        n=n,
+    )
+
+
 def trials_to_detect(
     r_real: float,
     r_imposter: float = 0.0,

@@ -50,3 +50,26 @@ track_b/oracles.py plus 10 tests. Results, all offline:
   RANDOMIZED schedule the accident vanishes; measured false-positive rate over
   100 schedules is 0.06 against nominal alpha 0.05. Consequence for PREREG.md:
   randomized trial order is mandatory, ascending blocks are excluded by design.
+
+### Deliverable 3 DONE: cache mining
+
+track_b/replay.py (cache replay via a raising dummy client, prompt rebuilt
+bit-for-bit, verified by an integration test that hits the real cache),
+track_b/mine_cache.py, results in cache_mining_results.json, writeup in
+CACHE_MINING.md. Four headline results, all free:
+
+1. At the fixed knob, set tracking is p = 0.001 for EVERY system including
+   imposters (vocabulary confound); magnitude separates (arch 0.78 to 1.00 vs
+   imposters 0.01 to 0.34) but significance does not. Strongest free argument
+   for intervention over content matching.
+2. The unlucky imposter exists in cache: Opus prompted_strict reconstructs the
+   real workspace's delivered set at Jaccard 0.54 with no workspace at all.
+3. Imposter reports track their own prompt-strength knob (rho up to -0.79),
+   i.e. they track the wrong thing, as predicted.
+4. Behavior sees the capacity knob only through starvation; at oracle 1.0 it
+   is flat or degenerate at ceiling. Reports can track the knob exactly where
+   accuracy cannot, so the perturbation DV is not redundant with performance.
+
+Missing, stated in CACHE_MINING.md: architectural reports off capacity 20,
+any attention-noise cells with reports, imposter reports under a moved knob,
+HOT-2 confidence data.
