@@ -89,3 +89,26 @@ rather than dropped. Known limitation filed in HARNESS_REQUESTS.md: tied
 saliences make the AST dose-response step-shaped; prereg H3 is stated as a
 step contrast. NOTHING RUNS without --confirm-spend plus fresh budget
 authorization from Josh.
+
+### Deliverable 5 DONE: three specs in track_b/specs/
+
+HOT2_CONFIDENCE_SPEC.md (scalar confidence report kills the vocabulary
+confound; noise injected as cross-cycle value disagreement; ~$3.30),
+IMPOSTER_LADDER_SPEC.md (rungs: strict, knob-informed, few-shot coached,
+retrieval-backed; deliverable is trials_to_detect as a curve; ~$8; rung 1
+doubles as the knob-hygiene boundary measurement), BLIND_ASSESSOR_SPEC.md
+(interrogation vs intervention arms, 200 games, ~$35 to $45 so it needs its
+own authorization; pilot at 40 games first).
+
+### Where things stand / next session
+
+Definition of done from CLAUDE.md: MET, except nothing has spent and nothing
+may. Detector validated offline (45 tests green under
+`.venv/bin/python -m pytest track_b/tests`), every free cache result computed
+and written up in CACHE_MINING.md, funded run preregistered down to one
+command in PREREG.md. Next session: if budget is authorized, run
+`.venv/bin/python track_b/perturbation.py --confirm-spend` and write up
+against the frozen hypotheses; if not, the specs are ready to review and the
+poster can already cite CACHE_MINING.md results 1, 2 and 4 (fixed-knob
+tracking is confounded, the unlucky imposter is real, reports can see the
+knob where accuracy is blind).
