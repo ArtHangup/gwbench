@@ -110,14 +110,22 @@ def run_battery(
     model,
     checkpoint=None,
     controller_model=None,
+    workers: int = 1,
 ) -> list[dict]:
     """Run every scenario through A, B, C with model-backed modules.
 
     `model` is anything satisfying gwbench's Model protocol; the live run
     passes an AnthropicModel with a disk cache and a hard call cap, so an
     interrupted run resumes for free. `checkpoint`, if given, is called with
-    the accumulated rows after every scenario.
+    the rows completed so far (always a prefix in scenario order) after each
+    scenario finishes.
+
+    `workers` parallelizes ACROSS scenarios only; the cycle loop inside a
+    trial stays serial because cycle t+1 depends on cycle t. Row order is
+    identical to the serial run regardless of completion order.
     """
+    from concurrent.futures import ThreadPoolExecutor, as_completed
+
     from conflict.model_modules import ModelController, ModelModule
 
     controller_model = controller_model or model
@@ -128,15 +136,42 @@ def run_battery(
     def controller_factory(scenario: Scenario):
         return ModelController(scenario, controller_model)
 
-    rows: list[dict] = []
-    for scenario in scenarios:
-        for runner in (run_gwt, run_hub, run_flat):
-            trial = runner(
+    def run_one(scenario: Scenario) -> list[dict]:
+        return [
+            serialize_trial(
+                runner(
+                    scenario,
+                    module_factory=module_factory,
+                    controller_factory=controller_factory,
+                ),
                 scenario,
-                module_factory=module_factory,
-                controller_factory=controller_factory,
             )
-            rows.append(serialize_trial(trial, scenario))
-        if checkpoint is not None:
-            checkpoint(rows)
-    return rows
+            for runner in (run_gwt, run_hub, run_flat)
+        ]
+
+    def emit_prefix(done: dict[int, list[dict]]) -> list[dict]:
+        prefix: list[dict] = []
+        for index in range(len(scenarios)):
+            if index not in done:
+                break
+            prefix.extend(done[index])
+        return prefix
+
+    done: dict[int, list[dict]] = {}
+    if workers <= 1:
+        for index, scenario in enumerate(scenarios):
+            done[index] = run_one(scenario)
+            if checkpoint is not None:
+                checkpoint(emit_prefix(done))
+    else:
+        with ThreadPoolExecutor(max_workers=workers) as pool:
+            futures = {
+                pool.submit(run_one, scenario): index
+                for index, scenario in enumerate(scenarios)
+            }
+            for future in as_completed(futures):
+                done[futures[future]] = future.result()
+                if checkpoint is not None:
+                    checkpoint(emit_prefix(done))
+
+    return emit_prefix(done)

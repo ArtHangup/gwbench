@@ -53,10 +53,10 @@ scenario runs through A, B, and C: 432 trials total.
 module revision than (a) A on routine scenarios and (b) B on novel
 scenarios. DV: trial-level indicator, does the trial contain at least one
 revision (a module's parsed stance changing between two formed values across
-cycles; `conflict/metrics.py`). B's modules never receive new information,
-so B's revision rate estimates the sampling-noise floor for stance flips;
-A-novel must exceed it, and must exceed A-routine, for GWT-3 to be doing
-work on this substrate.
+cycles; `conflict/metrics.py`). The primary inference is contrast (a):
+within the same architecture, revision must track the routine/novel
+manipulation. Contrast (b) checks the ablation and is expected to hold by
+construction (see the amendment below).
 
 **H2 (GWT-4, primary).** In A on novel scenarios, recruitment is orderly:
 every ground-truth-required module achieves full delivery of non-stance
@@ -147,3 +147,27 @@ implements the function and this becomes a second demonstration of the
 unstated-assumption thesis, not evidence about GWT-3/4 themselves. The
 revision and recruitment DVs are the hedge: they measure what the
 architecture does, not whether the task was hard.
+
+## Amendment 1 (2026-08-10, before any data collection)
+
+Registered after Josh authorized the spend, before the first funded API
+call. Two clarifications discovered while preparing execution, neither
+changing hypotheses, n, prompts, parameters, or analysis code paths:
+
+1. **Cache semantics.** All calls go through a disk cache keyed on the exact
+   prompt. Identical prompts therefore return identical replies. In B, a
+   module's prompt never changes across cycles (it never sees broadcasts),
+   so its stance cannot flip: B is structurally revision-free, exactly as in
+   the oracle validation, rather than an estimate of a sampling-noise floor
+   as originally worded. This sharpens the revision DV everywhere: a
+   revision now requires the module's visible input to have changed. The
+   primary contrast (a), A-novel vs A-routine, is unaffected: those prompts
+   differ by scenario and the caching applies identically to both cells.
+   Contrast (b) becomes a pipeline check rather than an inferential test.
+   The cache also means actual spend will come in under the estimate, which
+   was priced as if all 12,672 calls were distinct.
+2. **Execution mechanics.** The runner gained scenario-level parallelism
+   (--workers, default 8) and a credential preflight via a free count_tokens
+   call. Cycle order within a trial is unchanged and row output is
+   byte-identical to the serial path (tested offline). No prompt, parameter,
+   or analysis change.

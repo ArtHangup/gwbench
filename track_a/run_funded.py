@@ -18,7 +18,6 @@ worst case spend is bounded up front.
 
 import argparse
 import json
-import os
 import sys
 from pathlib import Path
 
@@ -59,18 +58,29 @@ def dry_run(n_per_cell: int) -> int:
     return 0
 
 
-def live_run(n_per_cell: int, out: Path) -> int:
-    if not os.environ.get("ANTHROPIC_API_KEY"):
-        print("ANTHROPIC_API_KEY is not set; refusing to construct a client.")
-        return 1
+def live_run(n_per_cell: int, out: Path, workers: int) -> int:
+    import anthropic
 
     from gwbench.anthropic_model import AnthropicModel
 
+    # Credentials resolve from the environment or the active `ant auth`
+    # profile; verify with a free count_tokens call before spending anything.
+    client = anthropic.Anthropic(max_retries=8)
+    try:
+        client.messages.count_tokens(
+            model=FUNDED_MODEL, messages=[{"role": "user", "content": "ping"}]
+        )
+    except Exception as error:
+        print(f"Credential preflight failed; refusing to run: {error}")
+        return 1
+
     plan = estimate(n_per_cell)
     print(f"LIVE run: {plan['total_calls']} calls, est ${plan['cost_usd']}, "
-          f"hard cap {plan['call_cap']} calls, model {FUNDED_MODEL}")
+          f"hard cap {plan['call_cap']} calls, model {FUNDED_MODEL}, "
+          f"{workers} workers", flush=True)
 
     model = AnthropicModel(
+        client=client,
         model=FUNDED_MODEL,
         max_tokens=400,
         effort=None,  # Haiku 4.5 predates the effort parameter
@@ -79,11 +89,18 @@ def live_run(n_per_cell: int, out: Path) -> int:
     )
 
     out.parent.mkdir(parents=True, exist_ok=True)
+    total_rows = 3 * plan["n_scenarios"]
 
     def checkpoint(rows: list[dict]) -> None:
         out.write_text(json.dumps({"plan": plan, "rows": rows}, indent=2))
+        print(
+            f"checkpoint: {len(rows)}/{total_rows} trials, "
+            f"{model.usage.calls} calls, "
+            f"{model.usage.input_tokens} in / {model.usage.output_tokens} out",
+            flush=True,
+        )
 
-    rows = run_battery(battery(n_per_cell), model, checkpoint=checkpoint)
+    rows = run_battery(battery(n_per_cell), model, checkpoint=checkpoint, workers=workers)
     checkpoint(rows)
     print(
         f"Done: {len(rows)} trials -> {out}. "
@@ -105,6 +122,10 @@ def main() -> int:
     parser.add_argument(
         "--out", type=Path, default=TRACK_A / "results" / "funded_run.json"
     )
+    parser.add_argument(
+        "--workers", type=int, default=8,
+        help="Scenario-level parallelism; cycles within a trial stay serial.",
+    )
     args = parser.parse_args()
 
     if not args.live:
@@ -112,7 +133,7 @@ def main() -> int:
     if not args.i_authorize_spend:
         print("Refusing: --live requires --i-authorize-spend (budget rules in CLAUDE.md).")
         return 1
-    return live_run(args.n_per_cell, args.out)
+    return live_run(args.n_per_cell, args.out, args.workers)
 
 
 if __name__ == "__main__":

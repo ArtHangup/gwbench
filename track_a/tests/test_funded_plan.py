@@ -56,3 +56,30 @@ def test_serialized_trial_is_json_round_trippable():
     assert "stance_history" in parsed
     assert "occupancy" in parsed
     assert parsed["required_modules"] == sorted(scenario.required_modules)
+
+
+def test_parallel_battery_matches_serial_rows():
+    from gwbench.models import ScriptedModel
+
+    from conflict.funded import run_battery
+
+    scenarios = battery(n_per_cell=4)
+
+    class DeterministicModel:
+        """Reply depends only on the prompt, so order of execution is moot."""
+
+        def complete(self, prompt: str) -> str:
+            if "deciding controller" in prompt:
+                return "Decision: option B."
+            return "SAY: steady report. | URGENCY: 0.6\nRECOMMEND: NONE"
+
+    model = DeterministicModel()
+    serial = run_battery(scenarios, model)
+    checkpoints = []
+    parallel = run_battery(
+        scenarios, model, workers=4, checkpoint=lambda rows: checkpoints.append(len(rows))
+    )
+    assert parallel == serial
+    # Checkpoints grow monotonically and end with the full battery.
+    assert checkpoints == sorted(checkpoints)
+    assert checkpoints[-1] == len(serial)
