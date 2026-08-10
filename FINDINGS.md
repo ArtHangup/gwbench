@@ -34,6 +34,14 @@ So the difficulty knob that opens the window is **how many facts must be integra
 how many distractors are present. Quadrupling distractors never broke the ceiling for
 either model; adding four required facts did.
 
+Confirmed again at 14 facts (2026-08-10): **Sonnet 5 is at perfect ceiling at the hardest
+clean task the historical pool allows**, 1.00 everywhere, both arms, 60/60, $5.16
+(`hard_sweep_r14_sonnet-5.json`). The matching Opus run was stopped as uninformative;
+partial calls are in the cache. The container pools were extended to 60 bases and 12
+modifiers (backward compatibly, defaults pinned to 20/8 and fingerprint-verified) so a
+future run can push to 24 to 30 required facts, but no run on the extended pool has
+happened. **Experiments paused here pending a redesign of the task family.**
+
 That bounds the generality of everything below. The capacity effect is measurable in a
 narrow band, and the poster should say so rather than imply the result is model-general.
 
