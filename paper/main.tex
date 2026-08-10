@@ -40,8 +40,11 @@ adversarially prompted model out-describes the real architecture on self-report
 value in 10\% of cases against the real system's 3\%, a gap requiring roughly 225
 trials per condition to detect; under attention-schema wording the identical prompt
 supplies it 95\% of the time. Behavioral assessment of indicator properties is
-defeatable, and how easily depends on the indicator's vocabulary. A
-matched-availability variant then reverses the ordering outright: a genuine
+defeatable, and how easily depends on the indicator's vocabulary and on the
+assessed model: rerun on \opus{}, the same strict prompt keeps the self-report
+but leaks every probed value (292/293), so a probe calibrated on one model's
+compliance transfers to neither the leak rate nor the required sample size of
+another. A matched-availability variant then reverses the ordering outright: a genuine
 capacity limit acts upstream on what arrives and has no suppression mechanism,
 so the real architecture answers every held item it is asked about, and which
 system looks constrained is decided by the choice of probe target.
@@ -109,7 +112,7 @@ methodological, and they are mostly warnings:
   (Section~\ref{sec:discussion}).
 \end{enumerate}
 
-Everything below cost \$60.17 of API spend across roughly 30{,}000 model calls,
+Everything below cost \$107.68 of API spend across roughly 35{,}000 model calls,
 which we note because the main practical obstacle to this kind of work is not
 compute but measurement: most of the calls were spent discovering that earlier,
 cheaper versions of the experiment could not answer the question.
@@ -496,11 +499,31 @@ for. For a black-box system, which is every frontier model, there is no
 probe-target choice that identifies the property: the two defensible choices
 yield opposite orderings.
 
-A cross-model replication of the full design on \opus{} is running at the time
-of writing and will be reported in the next revision of this preprint; unlike
-Experiment 1, the prompted-passing design does not require a strained model, so
-replication is cheap.
-% OPUS-REPLICATION-PLACEHOLDER
+\paragraph{Cross-model replication (\opus{}).} The full prompted-passing grid
+was rerun on \opus{} (300 trials per cell, both indicators, 4{,}456 calls,
+\$47.51). The architectural system replicates cleanly: leak 0.05 under both
+vocabularies (16/291 under GWT-2, 16/300 under AST-1). The imitations do not
+transfer at all. Strict imitation, the cell that held the line on \haiku{}
+(leak 0.10 under GWT-2), leaks completely on \opus{}: 181/181 under GWT-2 and
+292/293 under AST-1. The other prompted cells with usable samples behave the
+same way (weak GWT-2 113/113, mid AST-1 217/217; the one exception, mid GWT-2
+at 6/9, is too small to interpret). Throughout, \opus{} keeps passing the
+self-report probe (strict: 1.00 under GWT-2, 0.96 under AST-1): it reproduces
+the workspace description and restates the claimed four-item limit, then
+answers the probe question anyway, typically by declaring the probed container
+to have been inside the workspace all along. Where \haiku{} committed to the
+suppression, \opus{} keeps the vocabulary and refuses the behavior. The
+defeatability of a constraint probe is therefore not a property of the probe
+alone but a disposition of the assessed model, and an audit whose sample sizes
+were calibrated on one model's compliance (the $\sim$225-trial figure above)
+transfers to neither the leak rate nor the required $n$ of another. Two
+caveats. Cell sizes vary widely because trials without an unclaimed probe
+target are dropped, and the dropout is extreme where \opus{} claims every
+container (bare $n=6$ of 300 under GWT-2, prompted-weak $n=7$ under AST-1).
+And the keyword grader classifies many \opus{} refusal paraphrases as
+``guessed'' rather than refused, so the leak rate, which requires an
+exact-value match, is the robust statistic here; the intermediate categories
+are not.
 
 \section{Discussion}
 \label{sec:discussion}
@@ -556,7 +579,7 @@ treated as adversarial evaluations, not questionnaires.
 
 \textbf{Single vendor, few models.} All experiments use Anthropic models; the
 dose-response uses only \haiku{}, the sole model in our grid strained enough to
-measure. Cross-model replication of Experiment 2 is in progress
+measure. Experiment 2 was replicated across two models
 (Section~\ref{sec:robustness}); Experiment 1's regime search would need to be
 repeated per model family. \textbf{Narrow operationalization.} One task family
 (arithmetic over named containers), one workspace implementation, heuristic
@@ -600,7 +623,7 @@ a public repository upon submission.
 Experiments, analysis, and drafting were carried out in collaboration with
 Claude (Anthropic), an AI assistant, under the author's direction; the assistant
 is a member of the model family under study, which readers may weigh as they see
-fit. Total API cost was \$60.17. The author has no financial relationship with
+fit. Total API cost was \$107.68. The author has no financial relationship with
 Anthropic beyond consumer-priced API access, and received no funding for this
 work.
 
