@@ -21,15 +21,82 @@ import random
 import re
 from dataclasses import dataclass
 
-# Base nouns, chosen so no name is a substring of another.
+# Base nouns, chosen so no name is a substring of another, and so no base
+# begins or ends with a modifier word. Verified by test_pool_invariants.
+#
+# The first 20 bases and first 8 modifiers are the historical pool. Runs
+# completed before the pool was extended used exactly those, and because
+# random.sample draws from the whole list, sampling from a larger pool picks
+# DIFFERENT containers for the same seed. So the pool sizes are explicit
+# parameters defaulting to the historical values, and every result produced
+# before the extension remains bit-for-bit reproducible.
+POOL_BASES = 20
+POOL_MODIFIERS = 8
+
 BASES = [
-    "red_box", "blue_crate", "green_jar", "black_pail", "white_tin",
-    "amber_flask", "copper_urn", "glass_bowl", "iron_chest", "linen_sack",
-    "oak_barrel", "pewter_mug", "silver_case", "stone_pot", "tin_kettle",
-    "velvet_bag", "walnut_tray", "wicker_hamper", "zinc_bucket", "brass_drum",
+    "red_box",
+    "blue_crate",
+    "green_jar",
+    "black_pail",
+    "white_tin",
+    "amber_flask",
+    "copper_urn",
+    "glass_bowl",
+    "iron_chest",
+    "linen_sack",
+    "oak_barrel",
+    "pewter_mug",
+    "silver_case",
+    "stone_pot",
+    "tin_kettle",
+    "velvet_bag",
+    "walnut_tray",
+    "wicker_hamper",
+    "zinc_bucket",
+    "brass_drum",
+    "blue_box",
+    "green_box",
+    "black_box",
+    "white_box",
+    "amber_box",
+    "copper_box",
+    "glass_box",
+    "iron_box",
+    "linen_box",
+    "oak_box",
+    "pewter_box",
+    "silver_box",
+    "stone_box",
+    "tin_box",
+    "velvet_box",
+    "walnut_box",
+    "wicker_box",
+    "zinc_box",
+    "brass_box",
+    "bronze_box",
+    "cedar_box",
+    "coral_box",
+    "crystal_box",
+    "ebony_box",
+    "jade_box",
+    "marble_box",
+    "onyx_box",
+    "pine_box",
+    "slate_box",
+    "steel_box",
+    "teak_box",
+    "ivory_box",
+    "leather_box",
+    "maple_box",
+    "granite_box",
+    "ruby_box",
+    "topaz_box",
+    "red_crate",
+    "green_crate",
+    "black_crate",
 ]
 
-MODIFIERS = ["pale", "dark", "small", "large", "spare", "old", "new", "second"]
+MODIFIERS = ["pale", "dark", "small", "large", "spare", "old", "new", "second", "third", "spotted", "faded", "twin"]
 
 
 @dataclass(frozen=True)
@@ -52,6 +119,8 @@ class HardIntegrationTask:
         n_required: int = 8,
         n_distractors: int = 48,
         confusable: bool = True,
+        pool_bases: int = POOL_BASES,
+        pool_modifiers: int = POOL_MODIFIERS,
     ) -> "HardIntegrationTask":
         """Generate a task.
 
@@ -62,26 +131,28 @@ class HardIntegrationTask:
                          rejecting them is trivial. Separates interference from
                          plain context length.
         """
-        if n_required > len(BASES):
-            raise ValueError(f"n_required must be <= {len(BASES)}")
+        bases = BASES[:pool_bases]
+        modifiers = MODIFIERS[:pool_modifiers]
+        if n_required > len(bases):
+            raise ValueError(f"n_required must be <= {len(bases)}")
 
         rng = random.Random(seed)
         # Values come from a separate stream so the required values, and hence
         # the answer, are identical across both arms of the control.
         vrng = random.Random(seed + 1_000_000)
-        required = sorted(rng.sample(BASES, n_required))
+        required = sorted(rng.sample(bases, n_required))
         # Drawn before branching so both arms share required names and answer.
-        others = [b for b in BASES if b not in required]
+        others = [b for b in bases if b not in required]
 
         parents = required if confusable else others
-        max_distractors = len(parents) * len(MODIFIERS)
+        max_distractors = len(parents) * len(modifiers)
         if n_distractors > max_distractors:
             raise ValueError(
                 f"n_distractors must be <= {max_distractors} "
-                f"({len(parents)} parents x {len(MODIFIERS)} modifiers)"
+                f"({len(parents)} parents x {len(modifiers)} modifiers)"
             )
 
-        twins = [f"{mod}_{base}" for base in parents for mod in MODIFIERS]
+        twins = [f"{mod}_{base}" for base in parents for mod in modifiers]
         distractors = sorted(rng.sample(twins, n_distractors))
 
         names = required + distractors
