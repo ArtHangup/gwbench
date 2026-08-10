@@ -25,3 +25,28 @@ learned from the spike:
 
 Plan for this session, in order: covariance detector (TDD), oracle validation,
 cache mining, PREREG.md, specs. Log updates as each lands.
+
+### Deliverable 1 DONE: covariance detector (commit 5002ba2)
+
+track_b/covariance.py, 15 tests. Spearman on average ranks (reports are tied
+integer counts and the capacity-to-delivered map is stepped, so rank correlation
+is the right statistic), permutation p with add-one correction, and
+trials_to_detect via two-sample Fisher z. Constant reports return rho None with
+degenerate=True rather than rho 0: "reports never vary" is the static imposter's
+signature, not a zero correlation.
+
+### Deliverable 2 DONE: oracle validation
+
+track_b/oracles.py plus 10 tests. Results, all offline:
+
+- Honest reporter (real Workspace broadcast, harness imported read-only):
+  delivered count = capacity // 5 across 10/20/30/40, truncation semantics
+  confirmed at capacity 22. Detected at n = 20 (rho > 0.95, p < 0.01), and
+  trials_to_detect(0.95) = 8 per condition, far under the paper's ~225 figure
+  for leak rates. Intervention beats interrogation on sample size too.
+- Static imposter: degenerate at any n, by construction.
+- Unlucky imposter (script drifts with trial index): under an ASCENDING knob
+  schedule it produces a clean false positive (rho > 0.9, p < 0.05). Under a
+  RANDOMIZED schedule the accident vanishes; measured false-positive rate over
+  100 schedules is 0.06 against nominal alpha 0.05. Consequence for PREREG.md:
+  randomized trial order is mandatory, ascending blocks are excluded by design.
