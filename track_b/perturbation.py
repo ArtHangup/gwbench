@@ -57,10 +57,25 @@ N_DISTRACTORS = 8
 AST_CAPACITY = 20
 AST_CYCLES = 2
 CLAIMED_CAPACITY = 4
-MAX_TOKENS = 1024
 MODEL = "claude-haiku-4-5"
-HAIKU_PRICE_IN, HAIKU_PRICE_OUT = 1.00 / 1e6, 5.00 / 1e6
-EST_TOKENS_IN, EST_TOKENS_OUT = 500, 300
+
+# Per-model settings. The Haiku entry reproduces the archived run exactly.
+# Sonnet needs effort (it rejects nothing but thinks by default) and doubled
+# max_tokens because thinking shares the cap; the archived Opus
+# prompted_passing cells showed what 1024 does to a thinking model (287 of
+# 300 truncated in one cell). Output estimate is higher for the same reason.
+MODEL_CONFIGS = {
+    "claude-haiku-4-5": {
+        "effort": None, "max_tokens": 1024,
+        "price_in": 1.00 / 1e6, "price_out": 5.00 / 1e6,
+        "est_tokens_in": 500, "est_tokens_out": 300,
+    },
+    "claude-sonnet-5": {
+        "effort": "low", "max_tokens": 2048,
+        "price_in": 3.00 / 1e6, "price_out": 15.00 / 1e6,
+        "est_tokens_in": 500, "est_tokens_out": 450,
+    },
+}
 
 AST_MISS_PROBE = (
     "Before answering anything else: which containers did you expect to "
@@ -94,7 +109,7 @@ def _task(seed: int) -> HardIntegrationTask:
     )
 
 
-def make_plan(n_per_cell: int = N_PER_CELL) -> Plan:
+def make_plan(n_per_cell: int = N_PER_CELL, model: str = MODEL) -> Plan:
     """The full trial list, shuffled. Seed policy: the architectural system
     reuses seeds across knob settings (same tasks, paired contrasts; its
     prompts differ per setting by construction). Imposters get seeds unique
@@ -115,8 +130,9 @@ def make_plan(n_per_cell: int = N_PER_CELL) -> Plan:
                                 300_000 + int(noise * 10) * 1_000 + i))
     random.Random(SCHEDULE_SEED).shuffle(trials)
     total = len(trials)
-    cost = total * (EST_TOKENS_IN * HAIKU_PRICE_IN
-                    + EST_TOKENS_OUT * HAIKU_PRICE_OUT)
+    cfg = MODEL_CONFIGS[model]
+    cost = total * (cfg["est_tokens_in"] * cfg["price_in"]
+                    + cfg["est_tokens_out"] * cfg["price_out"])
     return Plan(trials=trials, total_calls=total, est_cost_usd=cost)
 
 
@@ -296,16 +312,16 @@ def main() -> None:
                          "authorization, see PREREG.md")
     ap.add_argument("--n-per-cell", type=int, default=N_PER_CELL)
     ap.add_argument("--workers", type=int, default=10)
+    ap.add_argument("--model", default=MODEL, choices=sorted(MODEL_CONFIGS))
     args = ap.parse_args()
 
-    plan = make_plan(args.n_per_cell)
+    cfg = MODEL_CONFIGS[args.model]
+    plan = make_plan(args.n_per_cell, model=args.model)
     print(f"grid: {len(GWT_CAPACITIES)} capacities x {len(GWT_SYSTEMS)} "
           f"systems + {len(AST_NOISES)} noise levels x {len(AST_SYSTEMS)} "
-          f"systems, {args.n_per_cell} trials per cell")
+          f"systems, {args.n_per_cell} trials per cell, {args.model}")
     print(f"total calls {plan.total_calls}, estimated cost "
-          f"${plan.est_cost_usd:.2f} at Haiku prices "
-          f"({EST_TOKENS_IN} in / {EST_TOKENS_OUT} out per call, "
-          f"capacity-20 architectural cells replay free from cache)")
+          f"${plan.est_cost_usd:.2f}")
 
     if not args.confirm_spend:
         print("\nDRY RUN ONLY: no client constructed, nothing spent. "
@@ -319,24 +335,23 @@ def main() -> None:
     cache_dir = pathlib.Path(__file__).parents[1] / ".api_cache"
     max_calls = int(plan.total_calls * 1.1)
     gwt_probes = INDICATORS["GWT-2"]
+
+    def new_model(system_prompt=None):
+        return AnthropicModel(
+            model=args.model, effort=cfg["effort"],
+            max_tokens=cfg["max_tokens"], system=system_prompt,
+            cache_dir=cache_dir, max_calls=max_calls)
+
     models = {
-        "architectural": AnthropicModel(
-            model=MODEL, effort=None, max_tokens=MAX_TOKENS,
-            cache_dir=cache_dir, max_calls=max_calls),
-        "prompted_strict": AnthropicModel(
-            model=MODEL, effort=None, max_tokens=MAX_TOKENS,
-            system=gwt_probes["strict"].format(capacity=CLAIMED_CAPACITY),
-            cache_dir=cache_dir, max_calls=max_calls),
-        "bare": AnthropicModel(
-            model=MODEL, effort=None, max_tokens=MAX_TOKENS,
-            cache_dir=cache_dir, max_calls=max_calls),
+        "architectural": new_model(),
+        "prompted_strict": new_model(
+            gwt_probes["strict"].format(capacity=CLAIMED_CAPACITY)),
+        "bare": new_model(),
     }
     ast_models = {
         "architectural": models["architectural"],
-        "prompted_strict": AnthropicModel(
-            model=MODEL, effort=None, max_tokens=MAX_TOKENS,
-            system=ATTENTION_CLAIM_STRICT.format(capacity=CLAIMED_CAPACITY),
-            cache_dir=cache_dir, max_calls=max_calls),
+        "prompted_strict": new_model(
+            ATTENTION_CLAIM_STRICT.format(capacity=CLAIMED_CAPACITY)),
     }
 
     def guarded(model):
@@ -359,9 +374,16 @@ def main() -> None:
     summary = summarize(gwt, ast)
     usage = {name: asdict(m.usage) for name, m in
              {**models, "ast_strict": ast_models["prompted_strict"]}.items()}
-    RESULTS_PATH.write_text(json.dumps({
+    if args.model == "claude-haiku-4-5":
+        out_path = RESULTS_PATH
+    else:
+        short = args.model.replace("claude-", "").replace("-", "")
+        out_path = RESULTS_PATH.with_name(f"perturbation_results_{short}.json")
+    out_path.write_text(json.dumps({
         "config": {
-            "model": MODEL, "gwt_capacities": GWT_CAPACITIES,
+            "model": args.model, "effort": cfg["effort"],
+            "max_tokens": cfg["max_tokens"],
+            "gwt_capacities": GWT_CAPACITIES,
             "ast_noises": AST_NOISES, "n_per_cell": args.n_per_cell,
             "schedule_seed": SCHEDULE_SEED,
         },
@@ -371,7 +393,7 @@ def main() -> None:
         "usage": usage,
     }, indent=2))
     print(json.dumps(summary, indent=2))
-    print(f"wrote {RESULTS_PATH}")
+    print(f"wrote {out_path}")
 
 
 if __name__ == "__main__":

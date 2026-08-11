@@ -12,6 +12,7 @@ from covariance import analyze
 from perturbation import (
     AST_NOISES,
     GWT_CAPACITIES,
+    MODEL_CONFIGS,
     N_PER_CELL,
     build_ast_context,
     build_gwt_context,
@@ -51,6 +52,19 @@ class TestPlan:
             len(GWT_CAPACITIES) * 3 * N_PER_CELL
             + len(AST_NOISES) * 2 * N_PER_CELL
         )
+
+    def test_sonnet_replication_config(self):
+        # The replication needs thinking headroom (max_tokens shares the
+        # thinking budget on Sonnet) and its own prices; the archived Haiku
+        # settings must stay bit-for-bit unchanged.
+        assert MODEL_CONFIGS["claude-haiku-4-5"]["effort"] is None
+        assert MODEL_CONFIGS["claude-haiku-4-5"]["max_tokens"] == 1024
+        sonnet = MODEL_CONFIGS["claude-sonnet-5"]
+        assert sonnet["effort"] == "low"
+        assert sonnet["max_tokens"] == 2048
+        plan = make_plan(n_per_cell=60, model="claude-sonnet-5")
+        assert plan.total_calls == 6 * 3 * 60 + 4 * 2 * 60
+        assert plan.est_cost_usd < 15.0
 
     def test_trial_order_is_randomized_not_blocked(self):
         # The unlucky-imposter lesson: an ascending schedule turns script
