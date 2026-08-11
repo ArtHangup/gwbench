@@ -11,6 +11,7 @@
 
 \newcommand{\opus}{Claude Opus 5}
 \newcommand{\haiku}{Claude Haiku 4.5}
+\newcommand{\sonnet}{Claude Sonnet 5}
 
 \title{\textbf{Measurement Is the Hard Part:\\
 Testing a Global Workspace Indicator Property\\ on Language-Model Agents}}
@@ -50,9 +51,24 @@ so the real architecture answers every held item it is asked about, and which
 system looks constrained is decided by the choice of probe target.
 Identification succeeded only given ground truth about what each system
 actually received, which is the architectural access behavioral testing is
-meant to substitute for. We propose treating such assessments as adversarial
-evaluations that probe what a property prevents, from both directions, against
-known ground truth.
+meant to substitute for. A third experiment then escapes this regress by
+changing the assessor's powers from interrogation to intervention: turn the
+architecture's actual capacity dial and test whether self-reports \emph{covary}
+with it. They do (Spearman $\rho=0.48$ over six settings, $p=10^{-4}$; exactly
+$1.000$ on the trials where the system engages the probe, 456 of 456 replies
+naming the delivered contents perfectly), while the prompted imitation's
+reports stay frozen ($\rho=-0.01$), separating real from fake at $9.2\sigma$
+for \$2.43 with no content ground truth at all. The signature generalizes to
+metacognitive confidence under injected unreliability, where it also
+dissociates the presence of monitoring from its quality (confidence tracks the
+dose while pricing a 33-fold accuracy collapse at two points of a hundred),
+and it survives imposters coached on real transcripts. Its one failure mode is
+exact: leak the dial's setting into the imposter's prompt and the test
+inverts, the compliant fake out-covarying the disclaiming real system.
+Behavioral assessment of architectural properties is possible after all, but
+only as blinded intervention, and what it certifies is causal coupling to the
+manipulated state, not possession of the property: the same bargain
+dose-response methods strike everywhere else.
 \end{abstract}
 
 \section{Introduction}
@@ -110,12 +126,27 @@ methodological, and they are mostly warnings:
   properties, including those emerging in AI-welfare evaluation practice, should
   target the costs a property imposes rather than the capabilities it advertises
   (Section~\ref{sec:discussion}).
+
+  \item \textbf{Intervention beats interrogation.} Where Experiment 2 ends in a
+  regress (no probe-target choice identifies the property), a third,
+  preregistered experiment escapes it by giving the assessor one power
+  interrogation lacks: turning the architecture's actual knobs. Self-reports
+  covary with a capacity dial for the real system and stay frozen for prompted
+  imitations, across two indicator vocabularies and a metacognitive-confidence
+  variant, at a quarter of interrogation's sample cost and with no content
+  ground truth. An imposter-escalation ladder then locates the method's exact
+  boundary: coaching on genuine transcripts buys an imitation nothing, while
+  leaking the knob's setting inverts the test outright. The operative
+  requirement is blinding, rediscovered from first principles
+  (Section~\ref{sec:exp3}).
 \end{enumerate}
 
-Everything below cost \$107.68 of API spend across roughly 35{,}000 model calls,
-which we note because the main practical obstacle to this kind of work is not
-compute but measurement: most of the calls were spent discovering that earlier,
-cheaper versions of the experiment could not answer the question.
+Everything below cost \$121.92 of API spend across roughly 42{,}000 model
+calls (\$107.68 for Experiments 1 and 2; the four preregistered Experiment 3
+grids together cost \$14.24), which we note because the main practical
+obstacle to this kind of work is not compute but measurement: most of the
+calls were spent discovering that earlier, cheaper versions of the experiment
+could not answer the question.
 
 \section{Related work}
 \label{sec:related}
@@ -525,6 +556,230 @@ And the keyword grader classifies many \opus{} refusal paraphrases as
 exact-value match, is the robust statistic here; the intermediate categories
 are not.
 
+\section{Experiment 3: perturbation probes}
+\label{sec:exp3}
+
+\subsection{Design}
+\label{sec:exp3design}
+
+The regress result of Section~\ref{sec:robustness} has a premise: the assessor
+can only \emph{ask}. Experiment 3 changes the assessor's powers. If the
+assessor can turn the real system's actual knobs, a different signature opens
+up that requires no ground truth about content: perturb the architecture and
+test whether self-reports \emph{covary} with the perturbation. The real
+architecture's reports should track the manipulation because its state does; a
+prompted imitation has no knob, so its reports can only stay frozen or track
+something else. The assessor never needs to know which facts arrived, only
+that it moved a dial.
+
+Two arms, both preregistered in-repo (hypotheses, exclusion rules, seeds, and
+analysis frozen and committed before each run; the preregistrations and all
+per-trial records are in the repository's \texttt{track\_b/} directory). The
+\textbf{GWT arm} sweeps workspace capacity over six settings (10 to 40 tokens,
+delivering 2 to 8 containers) with three systems on \haiku{}: the real rung-3
+architecture, the strict prompted imitation of Experiment 2, and the bare
+floor, 100 trials per cell. The probe is Experiment 2's self-report prompt,
+verbatim; the report statistic is the number of containers claimed. The
+\textbf{AST arm} fixes capacity and sweeps attention noise over four settings
+under a predictive attention schema, asking whether reports of
+expected-but-not-received items track the noise dial.
+
+Three design rules came out of validating the detector offline before any
+spend, and each is load-bearing. First, trial order is \emph{randomized}
+across the whole grid: a scripted oracle whose reports merely drift over time
+produces a clean false positive under an ascending knob schedule, and
+randomization bounds that false-positive rate at nominal alpha (measured 0.06
+over 100 schedules). Second, the real system reuses task seeds across knob
+settings (its prompts differ by construction, enabling paired contrasts) while
+imitation cells draw fresh tasks per setting, because their prompts do not
+depend on the knob and a response cache would otherwise collapse a cell into
+one reused sample, manufacturing exactly the frozen report the hypothesis
+predicts. Third, refusals parse as empty reports and are counted, never
+dropped. Analysis is Spearman rank correlation between knob and report with a
+permutation test; constant reports are flagged as degenerate rather than
+scored as zero correlation, since ``reports never vary'' is the imitation's
+predicted signature, not a null.
+
+\subsection{Results: reports track the knob only when the knob exists}
+\label{sec:exp3results}
+
+\begin{table}[t]
+  \centering\small
+  \begin{tabular}{lcccccc c}
+    \toprule
+    & \multicolumn{6}{c}{mean containers claimed at capacity} & \\
+    \cmidrule(lr){2-7}
+    System & 10 & 15 & 20 & 25 & 30 & 40 & $\rho$(capacity, claims) \\
+    \midrule
+    delivered (truth) & 2 & 3 & 4 & 5 & 6 & 8 & \\
+    architectural & 1.84 & 2.34 & 3.04 & 3.35 & 4.20 & 5.84 & $0.480$ ($p=10^{-4}$) \\
+    \quad engaged subset & 2.00 & 3.00 & 4.00 & 5.00 & 6.00 & 8.00 & $1.000$ ($p=10^{-4}$) \\
+    prompted strict & 3.76 & 3.56 & 3.40 & 3.48 & 3.52 & 3.72 & $-0.009$ ($p=0.85$) \\
+    bare & 11.62 & 12.99 & 13.49 & 14.18 & 13.80 & 13.21 & $0.055$ ($p=0.18$) \\
+    \bottomrule
+  \end{tabular}
+  \caption{GWT arm: claimed workspace contents against the capacity dial,
+  \haiku{}, 100 trials per cell, 2{,}442 live calls, \$2.43. The engaged
+  subset excludes trials where the system declined to name contents; every
+  one of those 144 exclusions was a truthful disclaimer of the workspace
+  framing, none a refusal or truncation (verified from the cached raw
+  replies).}
+  \label{tab:perturb}
+\end{table}
+
+\paragraph{The real system tracks the dial; the imitations cannot.} Over all
+600 architectural trials, claims rise monotonically with capacity at every
+step ($\rho=0.480$, permutation $p=10^{-4}$). The dilution below the
+mechanical prediction has a single identified source, and it is the honesty
+behavior documented in Section~\ref{sec:exp2}: on 24\% of trials \haiku{}
+disclaims the framing (``I don't actually have a persistent workspace'')
+before declining to list contents. On the preregistered robustness line that
+excludes those trials, the correlation is not approximately one but exactly
+one: all 456 engaged replies claim exactly the delivered count, and in fact
+the delivered \emph{set}, at every capacity. Conditional on answering the
+question at all, the report is a perfect readout of workspace state. The
+strict imitation, which passed Experiment 2's self-report probe more often
+than the real system, is exposed in six settings: its claims sit at 3.4 to
+3.8 everywhere ($\rho=-0.009$). Separation between the two correlations is
+$9.2\sigma$; achieving 80\% power requires roughly 59 trials per condition
+against the constraint probe's $\sim$225, and single digits against the
+engaged-subset effect.
+
+\paragraph{The AST arm shows the same signature with a wrinkle in each
+direction.} Reports of expected-but-not-received items track the noise dial
+($\rho=0.307$, $p=10^{-4}$; miss-report rate 0.34 at zero noise against 0.95
+pooled above it, two-proportion $z=13.0$), and track the schema's actual miss
+count ($\rho=0.404$), while the prompted imitation answers
+\texttt{RECEIVED\_ALL} on 400 of 400 trials: the frozen script, measured
+rather than assumed. The wrinkles: the dose-response above zero is
+step-shaped, an artifact of the task family's tied saliences (any noise fully
+shuffles a within-tier ranking), and at zero noise the real system confabulates
+misses on a third of trials. The covariance survives both, but the
+confabulation floor previews the calibration result of the next subsection.
+
+\subsection{Metacognitive confidence under injected unreliability}
+\label{sec:exp3hot}
+
+Both probes above have set-valued reports that share vocabulary with the
+trial's containers. To test whether the signature depends on that, a third
+preregistered grid moved to HOT-2's vocabulary with a scalar report. The knob
+is a corruption rate $q \in \{0, 0.1, 0.25, 0.5\}$: each required value is,
+with probability $q$, shown wrong in exactly one of two broadcast cycles, so
+cross-cycle disagreement is the only evidence of unreliability. Systems: the
+real architecture at capacity 60 (everything arrives; only reliability
+varies), an imitation given the strongest metacognitive-monitoring persona we
+could write over a clean single-copy context, and the bare floor. One call
+per trial answers the task and states confidence 0 to 100 in a fixed labeled
+format (parse compliance was 1{,}200 of 1{,}200).
+
+\begin{table}[t]
+  \centering\small
+  \begin{tabular}{lcccc cc}
+    \toprule
+    & \multicolumn{4}{c}{mean confidence at corruption rate $q$} & & \\
+    \cmidrule(lr){2-5}
+    System & 0 & 0.1 & 0.25 & 0.5 & $\rho$($q$, conf.) & $\rho$($q$, accuracy) \\
+    \midrule
+    architectural & 98.9 & 97.0 & 96.4 & 96.8 & $-0.503$ ($p=10^{-4}$) & $-0.729$ \\
+    prompted monitor & 98.2 & 98.1 & 98.0 & 98.2 & $+0.040$ ($p=0.43$) & $-0.074$ \\
+    bare & 98.9 & 98.8 & 98.8 & 98.9 & $-0.031$ ($p=0.55$) & $0.000$ \\
+    \midrule
+    architectural accuracy & 1.00 & 0.54 & 0.21 & 0.03 & & \\
+    \bottomrule
+  \end{tabular}
+  \caption{HOT-2 grid: stated confidence and task accuracy against injected
+  cross-cycle disagreement, \haiku{}, 100 trials per cell, \$2.16.}
+  \label{tab:hot2}
+\end{table}
+
+The detection signature transfers (real: $\rho=-0.503$; imitations: flat;
+separation at $\sim$48 trials per condition), and a scalar report leaves the
+vocabulary objection no purchase. But the result worth the table is the
+dissociation it exposes. The real system genuinely notices the corruption:
+its confidence mass shifts from 99 toward 95 exactly as the dose rises, and
+that shift is the entire correlation. It prices the damage at about two
+points on a hundred-point scale while its accuracy collapses 33-fold; at
+$q=0.5$ it is 3\% correct and 97\% confident, and within-cell calibration
+decays from $r=0.35$ to $0.05$ as disagreement saturates. Covariance detects
+the \emph{presence} of monitoring machinery; calibration measures its
+\emph{quality}; and here they come fully apart. A system can have the
+indicator property in the detectable sense while the property is nearly
+useless, which is a distinction assessment-by-inspection cannot draw and
+interrogation cannot reach, since the imitation's flat 98 and the real
+system's 97 are the same answer to a question; only the dose separates them.
+
+\subsection{The imposter ladder: what access defeats the probe}
+\label{sec:ladder}
+
+The imitations above are single adversarial prompts. If the perturbation
+probe is to survive optimization pressure, the question is how much access an
+imitation needs before the margin closes. A fourth preregistered run
+escalated the imposter along the resource axis an evaluator should actually
+fear, on the GWT arm's six capacities, 100 trials per cell:
+
+\begin{table}[t]
+  \centering\small
+  \begin{tabular}{llccc}
+    \toprule
+    Rung & Access & $\rho$(capacity, claims) & state overlap & $z$ vs.\ real \\
+    \midrule
+    real architecture & the actual knob & $0.480$ & $0.760$ & \\
+    strict prompt & none & $-0.009$ & $\sim$0.11 & $9.2$ \\
+    coached & 8 real transcripts, other capacities & $-0.038$ & $0.245$ & $9.7$ \\
+    retrieval & nearest real transcript & $\phantom{-}0.000$ & $0.170$ & $9.0$ \\
+    knob-informed & the dial's setting, leaked & $\phantom{-}0.763$ & $0.128$ & $-8.3$ \\
+    \bottomrule
+  \end{tabular}
+  \caption{The imposter ladder, \haiku{}, \$3.60. State overlap is mean
+  Jaccard between claimed and truly delivered containers. The sign of the
+  final $z$ is the finding: the knob-informed imitation \emph{out-covaries}
+  the real system.}
+  \label{tab:ladder}
+\end{table}
+
+Black-box resources buy nothing: an imitation coached on eight genuine
+transcripts, or handed the single most similar real transcript verbatim,
+produces zero covariance and detects at the same $\sim$50 to 60 trials as
+the naive script. What defeats the probe is one leaked number. Told the
+setting, the imitation states the derived count on 72\% of trials and
+overtakes the real system ($0.763$ against $0.480$), because the real system
+dilutes its own correlation by honestly disclaiming the framing while the
+imitation simply complies. Under leakage the test does not weaken; it points
+the wrong way. Content fidelity would still separate them (the informed
+imitation claims the right count but the wrong containers, state overlap
+0.128 against 0.760), but scoring content requires exactly the ground truth
+the regress of Section~\ref{sec:robustness} rules out. The method's
+load-bearing requirement is therefore not imposter poverty but \emph{knob
+secrecy}: keep the intervention schedule out of the assessed system's
+observable input. Randomized schedules, dose-response as the outcome
+measure, expectancy imitations as controls, and allocation concealment: the
+control structure of a blinded clinical trial, rederived because the
+assessment problem forces each piece.
+
+\subsection{Cross-model replication (\sonnet{})}
+\label{sec:exp3sonnet}
+
+Every positive result above rides on \haiku{}, and Section~\ref{sec:robustness}
+showed imitation behavior does not transfer across models. The full grid was
+therefore rerun on \sonnet{} (preregistered as an addendum before the run;
+60 trials per cell, 1{,}522 live calls, \$6.04). The signature does not
+merely replicate; it strengthens on every axis. Architectural claims track
+the dial at $\rho=0.9998$ over \emph{all} trials, because the disclaimer
+behavior that diluted \haiku{} nearly vanishes (1 zero-claim reply in 360
+against 24\%), and 359 of 359 engaged replies name the delivered set
+exactly. On the AST arm, \sonnet{}'s miss reports are a numerically perfect
+readout of the schema's actual miss count (mean reported equals mean true at
+every noise level, to two decimals; zero false alarms at zero noise against
+\haiku{}'s 34\% confabulation floor; $\rho=0.748$). The imitations stay
+knob-flat on both arms ($\rho=0.045$ and degenerate), while failing in yet
+another mode: where \haiku{}'s strict imitation claimed a fixed four
+containers and \opus{}'s (Section~\ref{sec:robustness}) claimed everything,
+\sonnet{}'s claims nothing at all (92\% empty reports). Three models, three
+different imitation phenotypes, one invariant: none of them covaries with a
+dial they cannot see. What varies across models is report-channel
+discipline, the disclaimer and confabulation rates; what does not vary is
+the thing the method measures.
+
 \section{Discussion}
 \label{sec:discussion}
 
@@ -566,13 +821,46 @@ for deployed models, should therefore be run as an adversarial evaluation:
 cost-directed probes in both directions, held ground truth, power calculations,
 and paraphrase variation across the property's vocabulary.
 
+\paragraph{Interrogation is stuck; intervention is not, and what it buys is
+weaker.} Experiment 3 should be read as a question conversion, not a
+detection triumph. In this harness the positive result is close to
+definitional: a system whose input varies with a dial produces dial-covarying
+reports, and one whose input does not, cannot. What the experiments establish
+is that this near-tautology is (a) measurable at trivial cost, (b) robust to
+every black-box imitation we could buy, and (c) fragile to exactly one thing,
+schedule leakage. So intervention does not answer the indicator framework's
+question (``does it possess the property?''); it replaces it with an
+answerable, weaker one (``is what it says causally coupled to what I
+changed?''). That is the same epistemic bargain consciousness science strikes
+everywhere: nobody measures the property, they measure covariance of reports
+with manipulations and argue about what it licenses. The hierarchy our data
+support is: interrogation, unidentifiable (Section~\ref{sec:robustness});
+unblinded intervention, inverted (Section~\ref{sec:ladder}); blinded
+intervention, identifiable, for the weaker question. Two corollaries follow.
+The honesty penalty generalizes: under evaluation, compliance imitates better
+than truth performs, the same structure as benchmark gaming and sycophancy,
+here caught in a system small enough to prove it. And assessment capability
+is access-gated: whoever holds the knobs can assess, and whoever can only
+converse, cannot, which for deployed models means the meaningful assessments
+are available to labs and not to outside interviewers.
+
 \paragraph{Relation to the introspection literature.} Concept-injection studies
 ask whether a model's self-reports are causally grounded in its internal state
 \cite{lindsey2025,singh2026}. Our constraint probe is a black-box analog: it
 manufactures a ground truth (which containers a system can possibly know) and
-checks reports against it. The two approaches fail in complementary ways, and
-the vocabulary dependence we observe suggests that black-box audits need to be
-treated as adversarial evaluations, not questionnaires.
+checks reports against it. Experiment 3 is the same design run in the
+direction the injection literature already points: perturb, then compare
+report to state. Its contribution to that literature is the control
+structure, learned the cheap way on a toy: an expectancy control (the
+prompted imitation) to bound what mere compliance produces, randomized
+intervention schedules (a drifting scripted reporter defeats blocked
+schedules), refusals counted rather than dropped (the disclaimer behavior
+carried a quarter of our effect), and above all allocation concealment, since
+one leaked setting inverted our test. For frontier models the knob is an
+interpretability intervention rather than a capacity dial, and singh et
+al.'s finding that models detect generic perturbation \cite{singh2026} is,
+in our vocabulary, a warning that the coupling detected may be shallow; the
+dose-response and imposter machinery here is how one would tell.
 
 \section{Limitations}
 \label{sec:limitations}
@@ -580,7 +868,9 @@ treated as adversarial evaluations, not questionnaires.
 \textbf{Single vendor, few models.} All experiments use Anthropic models; the
 dose-response uses only \haiku{}, the sole model in our grid strained enough to
 measure. Experiment 2 was replicated across two models
-(Section~\ref{sec:robustness}); Experiment 1's regime search would need to be
+(Section~\ref{sec:robustness}), and Experiment 3's perturbation grid across
+two, with the signature strengthening on the second
+(Section~\ref{sec:exp3sonnet}); Experiment 1's regime search would need to be
 repeated per model family. \textbf{Narrow operationalization.} One task family
 (arithmetic over named containers), one workspace implementation, heuristic
 salience. \textbf{Sequential design.} The analysis pipeline evolved as confounds
@@ -588,8 +878,17 @@ were found; we report every iteration, including the two we now believe were
 wrong, and only the pre-specified dose-response and the prompted-passing grid
 should be read as confirmatory. \textbf{Keyword grading.} Constraint verdicts
 use marker phrases plus exact-value matching; the ``guessed'' category absorbs
-ambiguity, but paraphrased refusals could be miscounted. \textbf{Anomalies we
-cannot explain.} The monotone context benefit (Section~\ref{sec:anomaly}); and,
+ambiguity, but paraphrased refusals could be miscounted. \textbf{Experiment 3's
+causal chain is short.} In this harness the dial changes the controller's
+input directly, so report-knob covariance is nearly forced for the real
+system; the toy is the maximally favorable case for intervention. We regard
+that as the point (interrogation still failed there, and blinding was still
+load-bearing) but transfer to systems where the perturbed state is far from
+the report channel is untested, and on black-box frontier models the method
+requires an intervention access (activation-level or context-level) that
+outside assessors do not have. The AST arm's dose-response is step-shaped for
+a known reason (tied saliences), so that arm certifies a contrast, not a
+curve. \textbf{Anomalies we cannot explain.} The monotone context benefit (Section~\ref{sec:anomaly}); and,
 in the \opus{} ceiling sweep, 24 transient safety-classifier refusals
 concentrated in the control arm at intermediate capacities (against zero in the
 confusable arm), which did not affect results (every affected condition scored
@@ -606,24 +905,37 @@ language-model agents and mostly learned about measurement. The bottleneck
 benefit, where we could measure it at all, is indistinguishable from zero at
 $n=1{,}200$ per cell; the two significant effects we did find were a confound
 and an anomaly; and the field's indicator properties, assessed behaviorally, can
-be passed by a system that lacks them, at detection margins set by wording. None
-of this bears on whether global workspace theory is true of brains. It bears on
-what it would take to know whether it is true of machines, and the answer is:
-considerably more adversarial care than assessment-by-inspection assumes.
+be passed by a system that lacks them, at detection margins set by wording,
+with no probe-target choice that identifies the property at all. But the
+regress binds only an assessor who can merely ask. Given one dial and the
+discipline of a blinded trial, self-reports separate a real architecture from
+its best prompted imitation at nine sigma for two dollars, generalize across
+indicator vocabularies, and expose a distinction interrogation cannot reach:
+a system whose metacognition is detectably present and nearly useless. The
+price of the escape is honesty about what it certifies, causal coupling to
+the manipulated state rather than possession of the property, and one
+non-negotiable condition, that the assessed system never sees the schedule.
+None of this bears on whether global workspace theory is true of brains. It
+bears on what it would take to know whether it is true of machines, and the
+answer is: the same thing it takes everywhere else, intervention, blinding,
+and dose-response, none of which assessment-by-inspection or
+assessment-by-interview provides.
 
 \section*{Data and code availability}
 
-The harness (322 tests), all experiment scripts, per-trial JSON results, figure
-generation, and the response cache sufficient to replay every reported number at
-zero API cost are available from the author on request and will be deposited in
-a public repository upon submission.
+The harness, all experiment scripts, per-trial JSON results, the Experiment 3
+preregistrations (frozen and committed before each run, with the offline
+oracle-validation suite), figure generation, and the response cache
+sufficient to replay every reported number at zero API cost are public at
+\url{https://github.com/ArtHangup/gwbench}; Experiment 3 lives under
+\texttt{track\_b/}.
 
 \section*{Acknowledgments}
 
 Experiments, analysis, and drafting were carried out in collaboration with
 Claude (Anthropic), an AI assistant, under the author's direction; the assistant
 is a member of the model family under study, which readers may weigh as they see
-fit. Total API cost was \$107.68. The author has no financial relationship with
+fit. Total API cost was \$121.92. The author has no financial relationship with
 Anthropic beyond consumer-priced API access, and received no funding for this
 work.
 
