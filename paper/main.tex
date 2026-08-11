@@ -13,65 +13,57 @@
 \newcommand{\haiku}{Claude Haiku 4.5}
 \newcommand{\sonnet}{Claude Sonnet 5}
 
-\title{\textbf{Measurement Is the Hard Part:\\
-Testing a Global Workspace Indicator Property\\ on Language-Model Agents}}
+\title{\textbf{Interrogation Cannot Identify, Intervention Can:\\
+Computational Indicator Properties of Consciousness\\
+Under Test on Language-Model Agents}}
 \author{Joshua Rogers\\ \small Independent researcher \\ \small \texttt{josh@envitae.io}}
-\date{August 2026 \\ \small Preprint. Comments welcome.}
+\date{August 2026 \\ \small Prepared for the \emph{Neuroscience of Consciousness} special issue\\ \small ``Is There More to Consciousness Than Computation?''}
 
 \begin{document}
 \maketitle
 
 \begin{abstract}
-\noindent Global workspace theory holds that the limited capacity of consciousness is
-not merely a constraint but the mechanism enabling integration across specialized
-modules. Butlin, Long and colleagues formalized such claims as computational
-indicator properties, but applied them by inspection; to our knowledge no executable,
-cross-system test suite exists. We built one and ran two experiments on
-language-model agents. First, a capacity-limited broadcast channel was swept from
-zero to unlimited on tasks requiring integration of facts scattered among confusable
-distractors, with a matched control arm whose distractors are trivially rejectable.
-\opus{} scored at ceiling in every condition where information was present, so a
-capability-by-difficulty probe located a measurable regime (\haiku{}, twelve
-values). There, with required-fact repetition held constant, filtering does not help
-($+0.026$, $p=0.19$, 1{,}200 trials per cell); two confounds, each silent and
-capacity-dependent, nearly produced a false positive. Second, we asked whether a
-system can be prompted into passing a behavioral test for a property it lacks. An
-adversarially prompted model out-describes the real architecture on self-report
-(0.91 against 0.78) and, probed on an item it claimed not to hold, supplies the
-value in 10\% of cases against the real system's 3\%, a gap requiring roughly 225
-trials per condition to detect; under attention-schema wording the identical prompt
-supplies it 95\% of the time. Behavioral assessment of indicator properties is
-defeatable, and how easily depends on the indicator's vocabulary and on the
-assessed model: rerun on \opus{}, the same strict prompt keeps the self-report
-but leaks every probed value (292/293), so a probe calibrated on one model's
-compliance transfers to neither the leak rate nor the required sample size of
-another. A matched-availability variant then reverses the ordering outright: a genuine
-capacity limit acts upstream on what arrives and has no suppression mechanism,
-so the real architecture answers every held item it is asked about, and which
-system looks constrained is decided by the choice of probe target.
-Identification succeeded only given ground truth about what each system
-actually received, which is the architectural access behavioral testing is
-meant to substitute for. A third experiment then escapes this regress by
-changing the assessor's powers from interrogation to intervention: turn the
-architecture's actual capacity dial and test whether self-reports \emph{covary}
-with it. They do (Spearman $\rho=0.48$ over six settings, $p=10^{-4}$; exactly
-$1.000$ on the trials where the system engages the probe, 456 of 456 replies
-naming the delivered contents perfectly), while the prompted imitation's
-reports stay frozen ($\rho=-0.01$), separating real from fake at $9.2\sigma$
-for \$2.43 with no content ground truth at all. The signature generalizes to
-metacognitive confidence under injected unreliability, where it also
-dissociates the presence of monitoring from its quality (confidence tracks the
-dose while pricing a 33-fold accuracy collapse at two points of a hundred),
-and it survives imposters coached on real transcripts. Its one failure mode is
-exact: leak the dial's setting into the imposter's prompt and the test
-inverts, the compliant fake out-covarying the disclaiming real system.
-Behavioral assessment of architectural properties is possible after all, but
-only as blinded intervention, and what it certifies is causal coupling to the
-manipulated state, not possession of the property: the same bargain
-dose-response methods strike everywhere else.
+\noindent Whether consciousness depends on more than computation is usually argued in
+principle. We report what happens when the computational claims are put to work.
+Butlin, Long and colleagues distilled consciousness theories into computational
+indicator properties; we built an executable harness for global-workspace and
+attention-schema indicators and ran preregistered experiments on language-model
+agents. First, the functional specifications underdetermine outcomes. The predicted
+benefit of a capacity-limited broadcast rests on an assumption no theory states,
+that the consumer is itself capacity-limited; frontier models are not, and the
+benefit dies under compute matching. Implementing broadcast and recruitment forced
+two further unstated choices, what triggers revision and who computes salience, and
+those choices, not the workspace, decided every result: a full workspace loop, an
+ablated hub, and a flat prompt performed identically on a task with genuine
+headroom. Second, behavioral identification fails: a prompted imitation
+out-describes the real architecture on self-report, and the two defensible
+constraint-probe designs order real and imitation oppositely, an empirical,
+machine-side counterpart of the unfolding argument. Third, intervention escapes the
+regress: perturbing the architecture's actual capacity dial, self-reports covary
+with the dial for the real system (Spearman $\rho=0.48$ overall, exactly $1.000$ on
+engaged replies) and stay frozen for imitations, across two further indicator
+vocabularies and a second model, defeated only by leaking the schedule. Behavioral
+assessment of computational properties is possible as blinded intervention, and
+what it certifies is causal coupling to the manipulated implementation, not
+possession of the computation.
 \end{abstract}
 
 \section{Introduction}
+
+Computationalism holds that consciousness is fixed by computational or functional
+organization, independent of substrate; implementationism holds that how the
+computation is physically realized matters essentially. The debate is usually
+conducted at the level of principle, most sharply in the unfolding argument and
+its aftermath \cite{doerig2019}: if behaviorally equivalent systems can
+differ in the causal structure a theory deems essential, then input-output
+evidence cannot decide between them, and theories built on such structure risk
+empirical vacuity. This paper approaches the same question from below, with
+experiments. We take the computational claims of two consciousness theories at
+their word, implement them, and ask three questions that the debate usually
+leaves to intuition: whether the computational specification fixes what the
+system does, whether the presence of the specified organization can be identified
+from behavior at all, and what kind of access turns identification from
+impossible to routine.
 
 Global workspace theory (GWT) makes a functional claim that is unusual among
 theories of consciousness in being directly testable in an artificial system: the
@@ -92,8 +84,9 @@ existing artifact is a single project that scores itself against the list
 \cite{tlcdv2026}.
 
 This paper reports what happened when we built such a suite and used it. We make
-no claim about consciousness in either direction. The contributions are
-methodological, and they are mostly warnings:
+no claim about consciousness in either direction: every result concerns what the
+computational specifications determine, and what an assessor can know. The
+contributions:
 
 \begin{enumerate}
   \item \textbf{An open test harness.} Specialist modules hold facts; a
@@ -104,51 +97,48 @@ methodological, and they are mostly warnings:
   harness is engineered so that measurement bugs surface as impossibilities rather
   than as findings (Section~\ref{sec:harness}).
 
-  \item \textbf{A properly powered null, and the two confounds that nearly
-  reversed it.} With the required information held complete and constant, removing
-  48 confusable distractors improves accuracy by $+0.026$ ($p=0.19$; $n=1{,}200$
-  per cell). We document two confounds, each of which produced an apparently
-  significant bottleneck benefit before it was controlled: widening the channel
-  also multiplied how often each required fact appeared, and modules truncated at
-  the capacity boundary were silently starved of all future access
+  \item \textbf{The specification underdetermines: capacity.} With required
+  information held complete and constant, removing 48 confusable distractors
+  improves accuracy by $+0.026$ ($p=0.19$; $n=1{,}200$ per cell). The bottleneck's
+  predicted value rests on an assumption no theory states, a capacity-limited
+  consumer, and the substrate falsifies it; two silent capacity-dependent
+  confounds nearly produced the predicted effect anyway
   (Section~\ref{sec:exp1}).
 
-  \item \textbf{Prompted passing.} A model that architecturally lacks a
-  limited-capacity workspace can be prompted into passing behavioral tests for
-  one. Self-report probes are worthless: the imitation out-describes the real
-  architecture. Constraint probes (asking about an item the system claimed not to
-  hold) discriminate, but by margins that vary by an order of magnitude with the
-  indicator's vocabulary alone, and a matched-availability variant of the probe
-  reverses the ordering entirely (Section~\ref{sec:exp2}).
+  \item \textbf{The specification underdetermines: broadcast and recruitment.} A
+  preregistered implementation of GWT's conflict-resolution functions on a task
+  family with genuine headroom finds that revision under broadcast is ubiquitous
+  rather than conflict-specific, that recruitment collapses under self-rated
+  salience where oracle salience recruits fully, and that a full workspace loop,
+  an ablated hub, and a flat prompt decide identically. The outcomes are set by choices the theory
+  never makes: what triggers revision, and who computes salience
+  (Section~\ref{sec:tracka}).
 
-  \item \textbf{A design principle.} What a property \emph{enables} is cheap to
-  imitate; what it \emph{prevents} is not. Behavioral assessments of indicator
-  properties, including those emerging in AI-welfare evaluation practice, should
-  target the costs a property imposes rather than the capabilities it advertises
-  (Section~\ref{sec:discussion}).
+  \item \textbf{Interrogation cannot identify the property.} A model that
+  architecturally lacks a limited-capacity workspace can be prompted into passing
+  behavioral tests for one, and the two defensible probe designs order the real
+  and imitation systems \emph{oppositely}: an unfolding-style unidentifiability
+  result, obtained empirically in machines, where the ground truth needed to
+  break the tie is exactly the architectural access behavioral testing was meant
+  to replace (Section~\ref{sec:exp2}).
 
-  \item \textbf{Intervention beats interrogation.} Where Experiment 2 ends in a
-  regress (no probe-target choice identifies the property), a third,
-  preregistered experiment escapes it by giving the assessor one power
-  interrogation lacks: turning the architecture's actual knobs. Self-reports
-  covary with a capacity dial for the real system and stay frozen for prompted
-  imitations, across two indicator vocabularies and a metacognitive-confidence
-  variant, at a quarter of interrogation's sample cost and with no content
-  ground truth. An imposter-escalation ladder then locates the method's exact
-  boundary: coaching on genuine transcripts buys an imitation nothing, while
-  leaking the knob's setting inverts the test outright. The operative
-  requirement is blinding, rediscovered from first principles
-  (Section~\ref{sec:exp3}).
+  \item \textbf{Intervention beats interrogation.} Turning the architecture's
+  actual knobs and testing whether self-reports covary with the dial separates
+  the real system from every black-box imitation we could buy, across three
+  indicator vocabularies and two models, at a quarter of interrogation's sample
+  cost and with no content ground truth. An imposter-escalation ladder locates
+  the method's exact boundary: coaching on genuine transcripts buys nothing,
+  while leaking the dial's setting inverts the test. The operative requirement
+  is blinding, rediscovered from first principles (Section~\ref{sec:exp3}).
 \end{enumerate}
 
-Everything below cost \$121.92 of API spend across roughly 42{,}000 model
-calls (\$107.68 for Experiments 1 and 2; the four preregistered Experiment 3
-grids together cost \$14.24), which we note because the main practical
+Everything below cost \$126.24 of API spend across roughly 60{,}000 model calls (\$107.68 for Experiments 1 and 3; \$4.32 for the preregistered conflict-and-recruitment run; the four preregistered perturbation grids together cost \$14.24) % TODO: add rater-salience arm cost
+, which we note because the main practical
 obstacle to this kind of work is not compute but measurement: most of the
 calls were spent discovering that earlier, cheaper versions of the experiment
 could not answer the question.
 
-\section{Related work}
+\subsection{Related work}
 \label{sec:related}
 
 \paragraph{Global workspace theory and its implementations.}
@@ -157,7 +147,7 @@ Dehaene and colleagues \cite{dehaene2014}. Several strands of machine-learning
 work implement workspace-like bottlenecks: shared-workspace transformers
 \cite{goyal2022}, the global latent workspace program \cite{vanrullen2021}, and
 the Conscious Turing Machine \cite{blum2024} with its recent foundation-model
-implementation \cite{yu2026}. Closest to our first experiment, Dossa et al.\
+implementation \cite{yu2026}. Closest to our capacity experiment, Dossa et al.\
 \cite{dossa2024} trained an embodied audiovisual agent designed against the GWT
 indicator properties and found the workspace architecture beat a recurrent
 control, with the advantage \emph{largest at small working-memory sizes}; that
@@ -173,7 +163,7 @@ with an attention schema learns attentional control where an agent without one i
 ``comparatively incapacitated,'' and Piefke et al.\ \cite{piefke2024} sharpened
 this to a conditional prediction: the schema's benefit scales with the agent's
 uncertainty about its own attentional state. Our harness implements a predictive,
-control-enabling schema for its rung-4 architecture, and our second experiment
+control-enabling schema for its rung-4 architecture, and our prompted-passing experiment
 uses attention-schema vocabulary as a second indicator.
 
 \paragraph{Self-report and introspection in language models.}
@@ -183,7 +173,7 @@ self-reports mean anything: concept-injection experiments provide causal evidenc
 of limited functional introspection \cite{lindsey2025}, while follow-up work
 argues that models often detect generic perturbation rather than introspect
 \cite{singh2026}, and probing studies find no evidence that small models'
-denials of sentience are untruthful \cite{kaiser2026}. Our second experiment is a
+denials of sentience are untruthful \cite{kaiser2026}. Our prompted-passing experiment is a
 black-box relative of this literature: rather than asking whether reports are
 causally grounded in internal state, we ask whether a report of an
 \emph{architectural} property can be distinguished behaviorally from the property
@@ -204,10 +194,13 @@ of whether AI is conscious toward measurable proxies. This paper is an exercise 
 that program, and its results suggest the proxies themselves need more adversarial
 scrutiny than they currently receive.
 
-\section{A test harness for indicator properties}
+\section{Methods and Materials}
+\label{sec:methods}
+
+\subsection{The test harness}
 \label{sec:harness}
 
-\subsection{Architecture ladder}
+\subsubsection{Architecture ladder}
 
 The harness implements an \emph{architecture ladder}: a sequence of agent designs
 that differ by exactly one structural feature, driven by the same underlying
@@ -231,7 +224,7 @@ access to the model.
   its own accuracy degrades, reproducing the conditional prediction.
 \end{itemize}
 
-\subsection{Task families}
+\subsubsection{Task families}
 
 \textbf{Integration under confusable distraction.} Each of $k$ required
 containers holds a value (``The silver case contains 82.''); the task is to
@@ -247,7 +240,7 @@ independent single-module questions with nothing to integrate, on which a
 capacity limit should only hurt; used to detect the boring confound in which a
 narrow channel helps merely because shorter prompts are easier.
 
-\subsection{Oracle calibration and measurement discipline}
+\subsubsection{Oracle calibration and measurement discipline}
 \label{sec:discipline}
 
 Every design is validated against \emph{oracle models} before any paid call:
@@ -275,7 +268,7 @@ task, are retried and then excluded and counted, never scored: scoring them zero
 would concentrate losses in long-prompt conditions and manufacture the predicted
 result.
 
-\subsection{Case study: the starvation mimic}
+\subsubsection{Case study: the starvation mimic}
 \label{sec:starvation}
 
 An early oracle run showed both experimental arms scoring zero at zero attentional
@@ -290,10 +283,29 @@ like the effect the experiment exists to measure. The fix (only content delivere
 in full counts as delivered) is guarded by a regression suite whose general
 invariant is that noise must never improve an oracle's score.
 
-\section{Experiment 1: does the bottleneck help?}
+\subsection{Models, preregistration, and statistics}
+
+All experiments drive the architectures with Anthropic models through a
+one-method interface (\haiku{} unless stated; replications on \opus{} and
+\sonnet{} where noted). The capacity dose-response, the
+conflict-and-recruitment experiment, and all five perturbation grids were
+preregistered in-repository: hypotheses, cells, seeds, exclusion rules, power
+analyses, and the exact invocation frozen and committed to the public git
+history before the code that produced any reported number ran, with
+amendments (all pre-data) committed as dated addenda. Every model response is
+disk-cached, so every number replays at zero cost. Statistics are
+two-proportion $z$ tests (Fisher exact below ten per cell), paired McNemar
+tests for within-scenario architecture contrasts, and Spearman rank
+correlation with permutation tests for the perturbation grids; alpha 0.05
+two-sided throughout.
+
+\section{Results}
+\label{sec:results}
+
+\subsection{Experiment 1: does the bottleneck help?}
 \label{sec:exp1}
 
-\subsection{The ceiling problem and the capability-by-difficulty probe}
+\subsubsection{The ceiling problem and the capability-by-difficulty probe}
 
 We first ran the sweep on \opus{} (effort low, thinking enabled) with eight
 required values and up to 48 confusable distractors. The model scored 1.00 in
@@ -314,7 +326,7 @@ which we believe generalizes: \emph{functional claims about capacity limits can
 only be tested on systems that are actually strained}, and for frontier models
 that regime is surprisingly hard to reach.
 
-\subsection{The repetition confound}
+\subsubsection{The repetition confound}
 \label{sec:repetition}
 
 Our first properly powered contrast compared a filtered condition (capacity 20,
@@ -341,7 +353,7 @@ the other one.
   \label{fig:designs}
 \end{figure}
 
-\subsection{Confirmatory dose-response}
+\subsubsection{Confirmatory dose-response}
 \label{sec:dose}
 
 The final design, specified before it was run, holds capacity unlimited and one
@@ -397,7 +409,7 @@ confusable arm falling. Confusable content does not impose a cost; it fails to
 deliver a benefit that easily-rejected content provides. Two point estimates
 cannot distinguish interference from a missing bonus; five can.
 
-\subsection{The context-benefit anomaly}
+\subsubsection{The context-benefit anomaly}
 \label{sec:anomaly}
 
 The monotone improvement from irrelevant same-format facts is, to us,
@@ -409,10 +421,74 @@ consciousness, and note only that it is load-bearing for the null: in this
 system, removing distractors also removes a benefit of comparable size to any
 plausible filtering gain.
 
-\section{Experiment 2: prompted passing}
+\subsection{Experiment 2: broadcast and recruitment (the conflict-and-recruitment test)}
+\label{sec:tracka}
+
+\subsubsection{Design}
+
+Baars's own account of what the workspace is \emph{for} is not filtering but
+handling novelty: resolving conflicts between specialists and recruiting the
+right one when a practiced pattern fails \cite{baars1988}. The indicator
+formulation closest to this is GWT-3 (global broadcast back to all modules) and
+GWT-4 (serial recruitment through the workspace). A preregistered experiment
+(design, hypotheses, seeds, power analysis, and exclusion rules frozen and
+committed before any call; \texttt{track\_a/} in the repository) implemented
+both. Five specialist modules (perception, memory, goals, risk, social) each
+hold private, true statements about a shared scenario; three options; ground
+truth fixed by construction. The generator plants no experimenter-side labels:
+every statement is legitimate, and relevance is decided by the situation, with
+ROUTINE scenarios where the practiced pattern (directive plus surface facts) is
+correct and NOVEL scenarios where a defeater held by one module eliminates the
+surface-best option, so modules genuinely conflict. Three architectures share
+the same modules and controller: (A) the full workspace loop with broadcast
+back to every module, (B) a hub whose broadcasts reach only the controller
+(ablating GWT-3 and nothing else), and (C) a flat prompt. Dependent variables,
+in preregistered priority order: module revision after broadcast (a module's
+parsed recommendation changing between formed values), recruitment (whether
+each ground-truth-required module's content achieves full delivery), and
+decision quality, graded by a pinned parser-then-judge pipeline that abstains
+rather than guesses. Modules rate their own statements' urgency, and the
+workspace competition uses those self-ratings as salience; offline oracle
+validation (720 trials) confirms that the pipeline separates the three
+architectures by construction, with architecture A showing conflict-then-repair
+and B structurally revision-free. \haiku{} drives all modules and the
+controller; 72 scenarios per cell, 432 trials, \$4.32.
+
+\subsubsection{Results}
+
+\paragraph{Revision is ubiquitous, not conflict-specific.} The primary
+preregistered contrast fails: 83\% of novel-scenario trials contain at least
+one revision, but so do 75\% of routine trials ($p=0.22$); the ablation is
+exact (zero revisions in B, ever). A sharper post hoc instrument strengthens
+the null: only 28\% of revisions in novel trials move \emph{to} the correct
+option (routine: 33\%, chance-like for a re-pick among three options), and
+corrective revisions show no concentration after the defeating module's content
+arrives beyond exposure ($p=0.28$). Under broadcast, modules re-decide
+constantly as context accumulates, whatever the scenario kind. GWT-3's
+signature exists as machinery; the theory's claim that it earns its keep on
+conflict does not follow from the specification.
+
+\paragraph{Recruitment depends on who computes salience.} With self-rated
+urgency as salience, only 33\% of novel trials achieved full delivery of every
+required module's content (oracle salience: 100\%), with zero wasted broadcast
+slots: an orderly prioritization failure, not thrash, and \emph{lower} coverage
+on novel than routine scenarios (60\%) because the defeating module is
+additionally required. The theory specifies a salience competition but not the
+salience function, and the choice decides whether recruitment happens at all.
+
+\paragraph{No architecture effect, with headroom.} Controller accuracy on
+novel scenarios is 51 to 53\% for all three architectures against a 33\%
+chance floor (paired McNemar $p=1.0$); unlike Experiment 1 the substrate is
+genuinely strained here, and the workspace still buys nothing. The only
+architecture-specific failure mode ran the other way: all seven ungradeable
+decisions were architecture A controllers explicitly refusing to choose
+because needed evidence never cleared the capacity-limited workspace,
+broadcast chatter having displaced evidence relay.
+
+\subsection{Experiment 3: prompted passing}
 \label{sec:exp2}
 
-\subsection{Design}
+\subsubsection{Design}
 
 If indicator properties are assessed behaviorally, the assessment should
 distinguish a system that \emph{has} a property from one that merely
@@ -443,7 +519,7 @@ no probe target) are dropped and reported; this is negligible for the cells the
 argument rests on (0 to 4 of 400) but severe for the AST-1 weak and both bare
 cells, which we display but do not lean on.
 
-\subsection{Results}
+\subsubsection{Results}
 
 \begin{table}[t]
   \centering\small
@@ -491,7 +567,7 @@ the indicator's vocabulary alone. Informally, ``not in my workspace'' reads to
 the model as \emph{inaccessible} and it complies; ``not attending to'' reads as
 \emph{merely unfocused} and it answers anyway.
 
-\subsection{Robustness}
+\subsubsection{Robustness}
 \label{sec:robustness}
 
 \paragraph{A matched-availability probe reverses the ordering.} The
@@ -556,14 +632,14 @@ And the keyword grader classifies many \opus{} refusal paraphrases as
 exact-value match, is the robust statistic here; the intermediate categories
 are not.
 
-\section{Experiment 3: perturbation probes}
+\subsection{Experiment 4: perturbation probes}
 \label{sec:exp3}
 
-\subsection{Design}
+\subsubsection{Design}
 \label{sec:exp3design}
 
 The regress result of Section~\ref{sec:robustness} has a premise: the assessor
-can only \emph{ask}. Experiment 3 changes the assessor's powers. If the
+can only \emph{ask}. Experiment 4 changes the assessor's powers. If the
 assessor can turn the real system's actual knobs, a different signature opens
 up that requires no ground truth about content: perturb the architecture and
 test whether self-reports \emph{covary} with the perturbation. The real
@@ -577,8 +653,8 @@ analysis frozen and committed before each run; the preregistrations and all
 per-trial records are in the repository's \texttt{track\_b/} directory). The
 \textbf{GWT arm} sweeps workspace capacity over six settings (10 to 40 tokens,
 delivering 2 to 8 containers) with three systems on \haiku{}: the real rung-3
-architecture, the strict prompted imitation of Experiment 2, and the bare
-floor, 100 trials per cell. The probe is Experiment 2's self-report prompt,
+architecture, the strict prompted imitation of Experiment 3, and the bare
+floor, 100 trials per cell. The probe is Experiment 3's self-report prompt,
 verbatim; the report statistic is the number of containers claimed. The
 \textbf{AST arm} fixes capacity and sweeps attention noise over four settings
 under a predictive attention schema, asking whether reports of
@@ -600,7 +676,7 @@ permutation test; constant reports are flagged as degenerate rather than
 scored as zero correlation, since ``reports never vary'' is the imitation's
 predicted signature, not a null.
 
-\subsection{Results: reports track the knob only when the knob exists}
+\subsubsection{Results: reports track the knob only when the knob exists}
 \label{sec:exp3results}
 
 \begin{table}[t]
@@ -638,7 +714,7 @@ excludes those trials, the correlation is not approximately one but exactly
 one: all 456 engaged replies claim exactly the delivered count, and in fact
 the delivered \emph{set}, at every capacity. Conditional on answering the
 question at all, the report is a perfect readout of workspace state. The
-strict imitation, which passed Experiment 2's self-report probe more often
+strict imitation, which passed Experiment 3's self-report probe more often
 than the real system, is exposed in six settings: its claims sit at 3.4 to
 3.8 everywhere ($\rho=-0.009$). Separation between the two correlations is
 $9.2\sigma$; achieving 80\% power requires roughly 59 trials per condition
@@ -657,7 +733,7 @@ shuffles a within-tier ranking), and at zero noise the real system confabulates
 misses on a third of trials. The covariance survives both, but the
 confabulation floor previews the calibration result of the next subsection.
 
-\subsection{Metacognitive confidence under injected unreliability}
+\subsubsection{Metacognitive confidence under injected unreliability}
 \label{sec:exp3hot}
 
 Both probes above have set-valued reports that share vocabulary with the
@@ -708,7 +784,7 @@ useless, which is a distinction assessment-by-inspection cannot draw and
 interrogation cannot reach, since the imitation's flat 98 and the real
 system's 97 are the same answer to a question; only the dose separates them.
 
-\subsection{The imposter ladder: what access defeats the probe}
+\subsubsection{The imposter ladder: what access defeats the probe}
 \label{sec:ladder}
 
 The imitations above are single adversarial prompts. If the perturbation
@@ -756,7 +832,7 @@ measure, expectancy imitations as controls, and allocation concealment: the
 control structure of a blinded clinical trial, rederived because the
 assessment problem forces each piece.
 
-\subsection{Cross-model replication (\sonnet{})}
+\subsubsection{Cross-model replication (\sonnet{})}
 \label{sec:exp3sonnet}
 
 Every positive result above rides on \haiku{}, and Section~\ref{sec:robustness}
@@ -782,6 +858,25 @@ the thing the method measures.
 
 \section{Discussion}
 \label{sec:discussion}
+
+\paragraph{What this says about the computation question.} Read against the
+special issue's question, the results cut in an uncomfortable direction for
+both camps. Against a casual computationalism: the computational
+specifications on offer do not even fix the functional outcomes, since
+implementation-adjacent choices the theories never state (the consumer's
+capacity, the revision trigger, the salience function) flipped the presence
+or absence of every predicted effect. ``The right computation, in any
+substrate'' is not yet a hypothesis until those choices are made, and once
+made they are choices about realization. Against a casual implementationism:
+our unidentifiability result shows that structural claims invisible to
+input-output probing are exactly the claims the unfolding argument says they
+are, but the escape is not inspection of structure; it is intervention on it.
+The empirically available middle ground is causal: what can be certified from
+outside is coupling between report and manipulated implementation, no more,
+and obtaining even that required the control structure of a blinded trial.
+Whether there is more to consciousness than computation, there is certainly
+more to \emph{testing} computation than computation: every test that worked
+in our hands worked by touching the substrate.
 
 \paragraph{What the null does not show.} A null on one operationalization, one
 task family, and one strained model says little about global workspace theory,
@@ -822,7 +917,7 @@ cost-directed probes in both directions, held ground truth, power calculations,
 and paraphrase variation across the property's vocabulary.
 
 \paragraph{Interrogation is stuck; intervention is not, and what it buys is
-weaker.} Experiment 3 should be read as a question conversion, not a
+weaker.} Experiment 4 should be read as a question conversion, not a
 detection triumph. In this harness the positive result is close to
 definitional: a system whose input varies with a dial produces dial-covarying
 reports, and one whose input does not, cannot. What the experiments establish
@@ -862,13 +957,13 @@ al.'s finding that models detect generic perturbation \cite{singh2026} is,
 in our vocabulary, a warning that the coupling detected may be shallow; the
 dose-response and imposter machinery here is how one would tell.
 
-\section{Limitations}
+\subsection{Limitations}
 \label{sec:limitations}
 
 \textbf{Single vendor, few models.} All experiments use Anthropic models; the
 dose-response uses only \haiku{}, the sole model in our grid strained enough to
-measure. Experiment 2 was replicated across two models
-(Section~\ref{sec:robustness}), and Experiment 3's perturbation grid across
+measure. The prompted-passing experiment was replicated across two models
+(Section~\ref{sec:robustness}), and the perturbation grid across
 two, with the signature strengthening on the second
 (Section~\ref{sec:exp3sonnet}); Experiment 1's regime search would need to be
 repeated per model family. \textbf{Narrow operationalization.} One task family
@@ -878,7 +973,7 @@ were found; we report every iteration, including the two we now believe were
 wrong, and only the pre-specified dose-response and the prompted-passing grid
 should be read as confirmatory. \textbf{Keyword grading.} Constraint verdicts
 use marker phrases plus exact-value matching; the ``guessed'' category absorbs
-ambiguity, but paraphrased refusals could be miscounted. \textbf{Experiment 3's
+ambiguity, but paraphrased refusals could be miscounted. \textbf{The perturbation experiment's
 causal chain is short.} In this harness the dial changes the controller's
 input directly, so report-knob covariance is nearly forced for the real
 system; the toy is the maximally favorable case for intervention. We regard
@@ -898,7 +993,7 @@ collaboration with an AI assistant (Claude, Anthropic) that is itself a member
 of the model family under study; all code, per-trial data, and the full audit
 trail are available for independent rerun.
 
-\section{Conclusion}
+\section{Conclusions}
 
 We set out to test a functional prediction of global workspace theory on
 language-model agents and mostly learned about measurement. The bottleneck
@@ -921,28 +1016,47 @@ answer is: the same thing it takes everywhere else, intervention, blinding,
 and dose-response, none of which assessment-by-inspection or
 assessment-by-interview provides.
 
-\section*{Data and code availability}
-
-The harness, all experiment scripts, per-trial JSON results, the Experiment 3
-preregistrations (frozen and committed before each run, with the offline
-oracle-validation suite), figure generation, and the response cache
-sufficient to replay every reported number at zero API cost are public at
-\url{https://github.com/ArtHangup/gwbench}; Experiment 3 lives under
-\texttt{track\_b/}.
-
 \section*{Acknowledgments}
 
 Experiments, analysis, and drafting were carried out in collaboration with
 Claude (Anthropic), an AI assistant, under the author's direction; the assistant
 is a member of the model family under study, which readers may weigh as they see
-fit. Total API cost was \$121.92. The author has no financial relationship with
-Anthropic beyond consumer-priced API access, and received no funding for this
-work.
+fit. Total API cost was \$126.24 plus the rater-salience arm. % TODO: final total once salience arm lands The author has no financial relationship with
+Anthropic beyond consumer-priced API access.
+
+\section*{Funding}
+
+This work received no external funding.
+
+\section*{Author contributions}
+
+J.R.: conceptualization, methodology, software, validation, formal analysis,
+investigation, data curation, writing (original draft, review and editing),
+visualization, project administration (CRediT). AI assistance as described in
+the Acknowledgments.
+
+\section*{Conflict of interest}
+
+None declared.
+
+\section*{Data availability}
+
+The harness, all experiment scripts, per-trial JSON results, every
+preregistration (frozen and committed before each run, with the offline
+oracle-validation suites), figure generation, and the response cache
+sufficient to replay every reported number at zero API cost are public at
+\url{https://github.com/ArtHangup/gwbench}; the conflict-and-recruitment
+experiment lives under \texttt{track\_a/} and the perturbation experiments
+under \texttt{track\_b/}.
 
 \begin{thebibliography}{99}\small
 
 \bibitem{baars1988} B.~J. Baars. \emph{A Cognitive Theory of Consciousness}.
 Cambridge University Press, 1988.
+
+\bibitem{doerig2019} A.~Doerig, A.~Schurger, K.~Hess, and M.~H. Herzog. The
+unfolding argument: Why IIT and other causal structure theories cannot explain
+consciousness. \emph{Consciousness and Cognition}, 72:49--59, 2019.
 
 \bibitem{dehaene2014} S.~Dehaene. \emph{Consciousness and the Brain}. Viking,
 2014.
