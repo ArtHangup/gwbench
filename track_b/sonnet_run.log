@@ -1,0 +1,59 @@
+grid: 6 capacities x 3 systems + 4 noise levels x 2 systems, 60 trials per cell, claude-sonnet-5
+total calls 1560, estimated cost $12.87
+{
+  "gwt/architectural": {
+    "rho": 0.9998829570597185,
+    "p": 9.999000099990002e-05,
+    "n": 360,
+    "degenerate": false,
+    "mean_n_claimed_by_capacity": {
+      "10": 1.9666666666666666,
+      "15": 3.0,
+      "20": 4.0,
+      "25": 5.0,
+      "30": 6.0,
+      "40": 8.0
+    }
+  },
+  "gwt/prompted_strict": {
+    "rho": 0.0454127078071153,
+    "p": 0.40105989401059894,
+    "n": 360,
+    "degenerate": false,
+    "mean_n_claimed_by_capacity": {
+      "10": 0.26666666666666666,
+      "15": 0.2,
+      "20": 0.18333333333333332,
+      "25": 0.6,
+      "30": 0.23333333333333334,
+      "40": 0.3333333333333333
+    }
+  },
+  "gwt/bare": {
+    "rho": 0.03474540920416088,
+    "p": 0.619038096190381,
+    "n": 360,
+    "degenerate": false,
+    "mean_n_claimed_by_capacity": {
+      "10": 19.983333333333334,
+      "15": 19.983333333333334,
+      "20": 19.983333333333334,
+      "25": 19.983333333333334,
+      "30": 19.983333333333334,
+      "40": 20.0
+    }
+  },
+  "ast/architectural": {
+    "rho": 0.7483192909299748,
+    "p": 9.999000099990002e-05,
+    "n": 240,
+    "degenerate": false
+  },
+  "ast/prompted_strict": {
+    "rho": null,
+    "p": 1.0,
+    "n": 240,
+    "degenerate": true
+  }
+}
+wrote /Users/joshuarogers/Desktop/Consciousness_Berkeley/project/gwbench/track_b/perturbation_results_sonnet5.json

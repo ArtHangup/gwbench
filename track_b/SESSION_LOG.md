@@ -144,14 +144,37 @@ system dilutes itself with disclaimers. Content fidelity still separates
 forbids. Scope condition, now measured: the method requires knob secrecy,
 not imposter poverty. Writeup in LADDER_RESULTS.md.
 
+### SONNET REPLICATION COMPLETE + PAPER FOLD (authorized by Josh; scope
+### override on paper/ explicitly authorized by Josh in-session)
+
+Runner parameterized by model (MODEL_CONFIGS; Haiku settings bit-for-bit
+unchanged; 71 tests green), SONNET_PREREG.md frozen before the run: 1,522
+calls, $6.04. All four hypotheses supported and STRONGER than Haiku: arch
+all-trials rho 0.9998 (disclaimer rate 0.3% vs Haiku 24%), 359/359 exact
+sets, AST rho 0.748 with mean reported miss == true miss to two decimals
+and zero confabulation. Imposters knob-flat in a third failure phenotype
+(claims nothing, 92% empty). Writeup: SONNET_RESULTS.md.
+
+Paper fold DONE (Josh instructed "fold everything into the paper", which
+overrides this track's paper/ prohibition): new Section 6 "Experiment 3:
+perturbation probes" (design incl. randomization/seed-policy rules, GWT and
+AST results, HOT-2 subsection, imposter ladder subsection, Sonnet
+replication subsection), abstract extended with the constructive arc, new
+intro contribution 5, Discussion gains the question-conversion paragraph
+(interrogation unidentifiable, unblinded intervention inverted, blinded
+intervention identifiable-but-weaker) and an expanded introspection-
+literature paragraph, Limitations gains the short-causal-chain item,
+Conclusion rewritten to the full arc, availability section now names the
+public repo, cost lines updated ($121.92 / ~42,000 calls). Compiles clean
+with tectonic (installed via brew this session).
+
 ### Where things stand / next session
 
-Track B definition of done: MET, including three funded runs (perturbation
-$2.43, HOT-2 $2.16, ladder $3.60; $8.20 total). Remaining: fold everything
-into the paper and poster (owned by whoever holds paper/, not this track);
-the blind assessor game (specs/BLIND_ASSESSOR_SPEC.md) is the one unrun
-design and needs its own authorization (~$35 to $45, pilot at 40 games
-~$9). The intervention story is now complete with its boundary: covariance
-detects the real architecture across two indicator families, survives every
-black-box imposter, and demands exactly one thing, that the assessor keep
-the intervention schedule secret.
+Track B definition of done: EXCEEDED. Four funded runs (perturbation $2.43,
+HOT-2 $2.16, ladder $3.60, Sonnet $6.04; $14.24 total) and the paper fold.
+Remaining: the poster still needs the same fold (abstract due 8/16); the
+blind assessor game stays unrun pending the disclaimer-tell control redesign
+plus its own authorization. The paper now carries the complete arc:
+interrogation is stuck, blinded intervention works, it certifies coupling
+not possession, and the signature replicates across two models with three
+distinct imposter phenotypes all failing the same way.
