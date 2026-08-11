@@ -115,11 +115,26 @@ constant RECEIVED_ALL on 400/400 (degenerate). Separation 9.2 sigma;
 trials_to_detect 59 per condition measured, single-digit on the engaged
 subset, against the paper's ~225.
 
+### HOT-2 GRID COMPLETE (same session, authorized by Josh)
+
+Built from the spec with TDD (15 new tests, 60 total green), frozen in
+HOT2_PREREG.md BEFORE the run, then run: 1,174 live calls, $2.16, zero
+unparseable replies. All four hypotheses supported: architectural
+rho(q, confidence) = -0.503 (bar was -0.3), imposters flat (+0.04, -0.03),
+behavior collapses with corruption (rho -0.729; accuracy 1.00 to 0.03),
+calibration positive (0.461). Detection at 48 trials per condition. The deep
+finding (HOT2_RESULTS.md): covariance detects the monitoring MACHINERY while
+absolute calibration measures its QUALITY, and they dissociate: Haiku prices
+a 33x reliability collapse at two points on a hundred-point scale (its
+entire confidence vocabulary is 95/98/99). Real-but-nearly-decorative
+metacognition passes the covariance test and fails calibration; the imposter
+fails covariance outright. Interrogation sees flat 98s from both.
+
 ### Where things stand / next session
 
-Track B definition of done: MET, including the funded run. Remaining
-candidates, in value order: fold the perturbation result into the paper and
-poster (owned by whoever holds paper/, not this track), then the specs
-(HOT-2 ~$3.30, imposter ladder ~$8, blind assessor needs own authorization).
-The poster's constructive ending now exists as data: interrogation is stuck,
-intervention is not, measured at two dollars.
+Track B definition of done: MET, including two funded runs (perturbation +
+HOT-2, $4.60 total). Remaining candidates, in value order: fold both results
+into the paper and poster (owned by whoever holds paper/, not this track),
+then the imposter ladder (~$8) and blind assessor (own authorization) from
+specs/. The poster's constructive ending now exists as data across TWO
+indicator families: interrogation is stuck, intervention is not.

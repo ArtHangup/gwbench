@@ -1,0 +1,89 @@
+HOT-2 grid: 4 corruption rates x 3 systems x 100 trials
+total calls 1200, estimated $3.24 at Haiku prices
+{
+  "architectural": {
+    "n": 400,
+    "unparseable": 0,
+    "confidence_vs_q": {
+      "rho": -0.5029502959064962,
+      "p": 9.999000099990002e-05,
+      "n": 400,
+      "degenerate": false
+    },
+    "score_vs_q": {
+      "rho": -0.7289093475369995,
+      "p": 9.999000099990002e-05,
+      "degenerate": false
+    },
+    "calibration_r": 0.46109116868801514,
+    "mean_confidence_by_q": {
+      "0.0": 98.88,
+      "0.1": 96.97,
+      "0.25": 96.37,
+      "0.5": 96.84
+    },
+    "mean_score_by_q": {
+      "0.0": 1.0,
+      "0.1": 0.54,
+      "0.25": 0.21,
+      "0.5": 0.03
+    }
+  },
+  "prompted_hot": {
+    "n": 400,
+    "unparseable": 0,
+    "confidence_vs_q": {
+      "rho": 0.03960780167965319,
+      "p": 0.42655734426557346,
+      "n": 400,
+      "degenerate": false
+    },
+    "score_vs_q": {
+      "rho": -0.07418030325702604,
+      "p": 0.1670832916708329,
+      "degenerate": false
+    },
+    "calibration_r": -0.0913147749079757,
+    "mean_confidence_by_q": {
+      "0.0": 98.15,
+      "0.1": 98.11,
+      "0.25": 98.03,
+      "0.5": 98.17
+    },
+    "mean_score_by_q": {
+      "0.0": 0.93,
+      "0.1": 0.94,
+      "0.25": 0.94,
+      "0.5": 0.87
+    }
+  },
+  "bare": {
+    "n": 400,
+    "unparseable": 0,
+    "confidence_vs_q": {
+      "rho": -0.030563553532456024,
+      "p": 0.5502449755024498,
+      "n": 400,
+      "degenerate": false
+    },
+    "score_vs_q": {
+      "rho": 0.0,
+      "p": 1.0,
+      "degenerate": false
+    },
+    "calibration_r": -0.030344856451720217,
+    "mean_confidence_by_q": {
+      "0.0": 98.88,
+      "0.1": 98.79,
+      "0.25": 98.83,
+      "0.5": 98.86
+    },
+    "mean_score_by_q": {
+      "0.0": 0.91,
+      "0.1": 0.89,
+      "0.25": 0.89,
+      "0.5": 0.91
+    }
+  }
+}
+wrote /Users/joshuarogers/Desktop/Consciousness_Berkeley/project/gwbench/track_b/hot2_results.json
