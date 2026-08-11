@@ -1,8 +1,40 @@
+checkpoint: 0/144 trials, module 148 calls, rater 295 calls
+checkpoint: 0/144 trials, module 183 calls, rater 353 calls
+checkpoint: 0/144 trials, module 188 calls, rater 359 calls
+checkpoint: 2/144 trials, module 191 calls, rater 362 calls
+checkpoint: 2/144 trials, module 233 calls, rater 474 calls
+checkpoint: 6/144 trials, module 235 calls, rater 476 calls
+checkpoint: 6/144 trials, module 302 calls, rater 650 calls
+checkpoint: 6/144 trials, module 339 calls, rater 733 calls
+checkpoint: 6/144 trials, module 340 calls, rater 738 calls
+checkpoint: 9/144 trials, module 362 calls, rater 789 calls
+checkpoint: 11/144 trials, module 374 calls, rater 811 calls
+checkpoint: 12/144 trials, module 405 calls, rater 867 calls
+checkpoint: 13/144 trials, module 460 calls, rater 966 calls
+checkpoint: 14/144 trials, module 540 calls, rater 1123 calls
+checkpoint: 14/144 trials, module 550 calls, rater 1144 calls
+checkpoint: 14/144 trials, module 558 calls, rater 1165 calls
+checkpoint: 17/144 trials, module 567 calls, rater 1197 calls
+checkpoint: 18/144 trials, module 597 calls, rater 1273 calls
+checkpoint: 19/144 trials, module 633 calls, rater 1372 calls
+checkpoint: 19/144 trials, module 656 calls, rater 1440 calls
+checkpoint: 20/144 trials, module 710 calls, rater 1542 calls
+checkpoint: 22/144 trials, module 751 calls, rater 1622 calls
+checkpoint: 23/144 trials, module 784 calls, rater 1687 calls
+checkpoint: 23/144 trials, module 801 calls, rater 1728 calls
+checkpoint: 25/144 trials, module 811 calls, rater 1760 calls
+checkpoint: 26/144 trials, module 876 calls, rater 1877 calls
+checkpoint: 26/144 trials, module 931 calls, rater 1987 calls
+checkpoint: 27/144 trials, module 942 calls, rater 2010 calls
+checkpoint: 29/144 trials, module 979 calls, rater 2081 calls
+checkpoint: 30/144 trials, module 980 calls, rater 2085 calls
+checkpoint: 31/144 trials, module 1035 calls, rater 2198 calls
+checkpoint: 32/144 trials, module 1066 calls, rater 2260 calls
 Traceback (most recent call last):
-  File "/Users/joshuarogers/Desktop/Consciousness_Berkeley/project/gwbench/track_a/run_salience_arm.py", line 120, in <module>
+  File "/Users/joshuarogers/Desktop/Consciousness_Berkeley/project/gwbench/track_a/run_salience_arm.py", line 135, in <module>
     raise SystemExit(main())
                      ^^^^^^
-  File "/Users/joshuarogers/Desktop/Consciousness_Berkeley/project/gwbench/track_a/run_salience_arm.py", line 110, in main
+  File "/Users/joshuarogers/Desktop/Consciousness_Berkeley/project/gwbench/track_a/run_salience_arm.py", line 125, in main
     rows = run(model, rater, args.n_per_cell, args.workers, checkpoint)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "/Users/joshuarogers/Desktop/Consciousness_Berkeley/project/gwbench/track_a/run_salience_arm.py", line 58, in run
@@ -25,9 +57,170 @@ Traceback (most recent call last):
   File "/Users/joshuarogers/Desktop/Consciousness_Berkeley/project/gwbench/track_a/conflict/architectures.py", line 100, in _run_cycles
     statements = module.emit(visible=list(module_visible) if feedback else [])
                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/joshuarogers/Desktop/Consciousness_Berkeley/project/gwbench/track_a/conflict/rater.py", line 51, in emit
+  File "/Users/joshuarogers/Desktop/Consciousness_Berkeley/project/gwbench/track_a/conflict/rater.py", line 53, in emit
     reply = self.rater.complete(
             ^^^^^^^^^^^^^^^^^^^^
-  File "/Users/joshuarogers/Desktop/Consciousness_Berkeley/project/gwbench/src/gwbench/anthropic_model.py", line 138, in complete
-    raise TruncatedResponse(
-gwbench.anthropic_model.TruncatedResponse: output hit max_tokens (10); raise it or lower effort
+  File "/Users/joshuarogers/Desktop/Consciousness_Berkeley/project/gwbench/track_a/run_salience_arm.py", line 109, in complete
+    return rater_inner.complete(prompt)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/joshuarogers/Desktop/Consciousness_Berkeley/project/gwbench/src/gwbench/anthropic_model.py", line 131, in complete
+    response = self.client.messages.create(**kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/joshuarogers/Desktop/Consciousness_Berkeley/project/gwbench/.venv/lib/python3.12/site-packages/anthropic/_utils/_utils.py", line 294, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/joshuarogers/Desktop/Consciousness_Berkeley/project/gwbench/.venv/lib/python3.12/site-packages/anthropic/resources/messages/messages.py", line 1050, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "/Users/joshuarogers/Desktop/Consciousness_Berkeley/project/gwbench/.venv/lib/python3.12/site-packages/anthropic/_base_client.py", line 1536, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/joshuarogers/Desktop/Consciousness_Berkeley/project/gwbench/.venv/lib/python3.12/site-packages/anthropic/_base_client.py", line 1195, in request
+    raise self._make_status_error_from_response(response) from None
+anthropic.InternalServerError: Error code: 500 - {'type': 'error', 'error': {'type': 'api_error', 'message': 'Internal server error'}, 'request_id': 'req_011Cdv6S1tF3BxULLXXsigrG'}
+checkpoint: 1/144 trials, module 131 calls, rater 276 calls
+checkpoint: 1/144 trials, module 152 calls, rater 314 calls
+checkpoint: 1/144 trials, module 162 calls, rater 332 calls
+checkpoint: 2/144 trials, module 168 calls, rater 349 calls
+checkpoint: 3/144 trials, module 187 calls, rater 395 calls
+checkpoint: 6/144 trials, module 200 calls, rater 437 calls
+checkpoint: 6/144 trials, module 325 calls, rater 691 calls
+checkpoint: 6/144 trials, module 342 calls, rater 722 calls
+checkpoint: 6/144 trials, module 356 calls, rater 759 calls
+checkpoint: 6/144 trials, module 366 calls, rater 788 calls
+checkpoint: 11/144 trials, module 376 calls, rater 822 calls
+checkpoint: 12/144 trials, module 381 calls, rater 836 calls
+checkpoint: 12/144 trials, module 439 calls, rater 997 calls
+checkpoint: 14/144 trials, module 482 calls, rater 1078 calls
+checkpoint: 15/144 trials, module 519 calls, rater 1150 calls
+checkpoint: 15/144 trials, module 521 calls, rater 1155 calls
+checkpoint: 17/144 trials, module 542 calls, rater 1214 calls
+checkpoint: 18/144 trials, module 550 calls, rater 1257 calls
+checkpoint: 18/144 trials, module 564 calls, rater 1334 calls
+checkpoint: 18/144 trials, module 586 calls, rater 1400 calls
+checkpoint: 20/144 trials, module 632 calls, rater 1520 calls
+checkpoint: 20/144 trials, module 653 calls, rater 1574 calls
+checkpoint: 20/144 trials, module 676 calls, rater 1632 calls
+checkpoint: 24/144 trials, module 684 calls, rater 1649 calls
+checkpoint: 24/144 trials, module 700 calls, rater 1701 calls
+checkpoint: 26/144 trials, module 719 calls, rater 1746 calls
+checkpoint: 26/144 trials, module 818 calls, rater 1957 calls
+checkpoint: 28/144 trials, module 826 calls, rater 1972 calls
+checkpoint: 28/144 trials, module 855 calls, rater 2042 calls
+checkpoint: 30/144 trials, module 888 calls, rater 2101 calls
+checkpoint: 31/144 trials, module 900 calls, rater 2125 calls
+checkpoint: 32/144 trials, module 949 calls, rater 2212 calls
+checkpoint: 33/144 trials, module 963 calls, rater 2240 calls
+checkpoint: 34/144 trials, module 1031 calls, rater 2373 calls
+checkpoint: 35/144 trials, module 1080 calls, rater 2476 calls
+checkpoint: 35/144 trials, module 1094 calls, rater 2514 calls
+checkpoint: 37/144 trials, module 1111 calls, rater 2554 calls
+checkpoint: 37/144 trials, module 1129 calls, rater 2620 calls
+checkpoint: 38/144 trials, module 1132 calls, rater 2633 calls
+checkpoint: 40/144 trials, module 1136 calls, rater 2665 calls
+checkpoint: 41/144 trials, module 1253 calls, rater 2906 calls
+checkpoint: 42/144 trials, module 1262 calls, rater 2922 calls
+checkpoint: 43/144 trials, module 1263 calls, rater 2923 calls
+checkpoint: 44/144 trials, module 1281 calls, rater 2957 calls
+checkpoint: 45/144 trials, module 1288 calls, rater 2969 calls
+checkpoint: 46/144 trials, module 1317 calls, rater 3036 calls
+checkpoint: 46/144 trials, module 1449 calls, rater 3276 calls
+checkpoint: 46/144 trials, module 1472 calls, rater 3323 calls
+checkpoint: 49/144 trials, module 1482 calls, rater 3347 calls
+checkpoint: 50/144 trials, module 1488 calls, rater 3364 calls
+checkpoint: 51/144 trials, module 1497 calls, rater 3389 calls
+checkpoint: 52/144 trials, module 1503 calls, rater 3402 calls
+checkpoint: 53/144 trials, module 1597 calls, rater 3568 calls
+checkpoint: 54/144 trials, module 1662 calls, rater 3673 calls
+checkpoint: 55/144 trials, module 1666 calls, rater 3684 calls
+checkpoint: 55/144 trials, module 1679 calls, rater 3722 calls
+checkpoint: 57/144 trials, module 1691 calls, rater 3757 calls
+checkpoint: 58/144 trials, module 1701 calls, rater 3796 calls
+checkpoint: 59/144 trials, module 1744 calls, rater 3974 calls
+checkpoint: 59/144 trials, module 1747 calls, rater 3989 calls
+checkpoint: 59/144 trials, module 1763 calls, rater 4047 calls
+checkpoint: 59/144 trials, module 1786 calls, rater 4124 calls
+checkpoint: 61/144 trials, module 1794 calls, rater 4149 calls
+checkpoint: 64/144 trials, module 1801 calls, rater 4169 calls
+checkpoint: 64/144 trials, module 1804 calls, rater 4187 calls
+checkpoint: 64/144 trials, module 1898 calls, rater 4400 calls
+checkpoint: 64/144 trials, module 1925 calls, rater 4454 calls
+checkpoint: 66/144 trials, module 1927 calls, rater 4460 calls
+checkpoint: 66/144 trials, module 1952 calls, rater 4511 calls
+checkpoint: 67/144 trials, module 1955 calls, rater 4520 calls
+checkpoint: 71/144 trials, module 2014 calls, rater 4635 calls
+checkpoint: 71/144 trials, module 2025 calls, rater 4662 calls
+checkpoint: 73/144 trials, module 2069 calls, rater 4742 calls
+checkpoint: 74/144 trials, module 2131 calls, rater 4857 calls
+checkpoint: 75/144 trials, module 2146 calls, rater 4884 calls
+checkpoint: 76/144 trials, module 2149 calls, rater 4887 calls
+checkpoint: 76/144 trials, module 2218 calls, rater 5068 calls
+checkpoint: 76/144 trials, module 2223 calls, rater 5081 calls
+checkpoint: 78/144 trials, module 2225 calls, rater 5085 calls
+checkpoint: 80/144 trials, module 2249 calls, rater 5169 calls
+checkpoint: 80/144 trials, module 2286 calls, rater 5260 calls
+checkpoint: 81/144 trials, module 2306 calls, rater 5307 calls
+checkpoint: 82/144 trials, module 2337 calls, rater 5389 calls
+checkpoint: 83/144 trials, module 2342 calls, rater 5397 calls
+checkpoint: 85/144 trials, module 2385 calls, rater 5506 calls
+checkpoint: 86/144 trials, module 2388 calls, rater 5515 calls
+checkpoint: 86/144 trials, module 2424 calls, rater 5619 calls
+checkpoint: 88/144 trials, module 2437 calls, rater 5648 calls
+checkpoint: 89/144 trials, module 2508 calls, rater 5776 calls
+checkpoint: 90/144 trials, module 2513 calls, rater 5788 calls
+checkpoint: 90/144 trials, module 2534 calls, rater 5850 calls
+checkpoint: 92/144 trials, module 2588 calls, rater 5958 calls
+checkpoint: 92/144 trials, module 2590 calls, rater 5958 calls
+checkpoint: 94/144 trials, module 2592 calls, rater 5962 calls
+checkpoint: 94/144 trials, module 2656 calls, rater 6144 calls
+checkpoint: 94/144 trials, module 2686 calls, rater 6196 calls
+checkpoint: 96/144 trials, module 2694 calls, rater 6219 calls
+checkpoint: 96/144 trials, module 2707 calls, rater 6255 calls
+checkpoint: 99/144 trials, module 2725 calls, rater 6293 calls
+checkpoint: 100/144 trials, module 2778 calls, rater 6407 calls
+checkpoint: 101/144 trials, module 2830 calls, rater 6510 calls
+checkpoint: 102/144 trials, module 2847 calls, rater 6546 calls
+checkpoint: 102/144 trials, module 2862 calls, rater 6576 calls
+checkpoint: 104/144 trials, module 2873 calls, rater 6598 calls
+checkpoint: 105/144 trials, module 2894 calls, rater 6659 calls
+checkpoint: 106/144 trials, module 2941 calls, rater 6756 calls
+checkpoint: 106/144 trials, module 2983 calls, rater 6849 calls
+checkpoint: 107/144 trials, module 3042 calls, rater 6967 calls
+checkpoint: 107/144 trials, module 3055 calls, rater 6996 calls
+checkpoint: 110/144 trials, module 3064 calls, rater 7022 calls
+checkpoint: 111/144 trials, module 3103 calls, rater 7101 calls
+checkpoint: 112/144 trials, module 3104 calls, rater 7103 calls
+checkpoint: 113/144 trials, module 3198 calls, rater 7280 calls
+checkpoint: 114/144 trials, module 3205 calls, rater 7291 calls
+checkpoint: 114/144 trials, module 3272 calls, rater 7417 calls
+checkpoint: 114/144 trials, module 3291 calls, rater 7450 calls
+checkpoint: 114/144 trials, module 3304 calls, rater 7478 calls
+checkpoint: 118/144 trials, module 3309 calls, rater 7484 calls
+checkpoint: 119/144 trials, module 3389 calls, rater 7658 calls
+checkpoint: 120/144 trials, module 3416 calls, rater 7717 calls
+checkpoint: 121/144 trials, module 3465 calls, rater 7808 calls
+checkpoint: 121/144 trials, module 3482 calls, rater 7846 calls
+checkpoint: 121/144 trials, module 3507 calls, rater 7898 calls
+checkpoint: 124/144 trials, module 3509 calls, rater 7900 calls
+checkpoint: 125/144 trials, module 3601 calls, rater 8083 calls
+checkpoint: 126/144 trials, module 3619 calls, rater 8119 calls
+checkpoint: 127/144 trials, module 3666 calls, rater 8218 calls
+checkpoint: 128/144 trials, module 3691 calls, rater 8298 calls
+checkpoint: 128/144 trials, module 3694 calls, rater 8307 calls
+checkpoint: 128/144 trials, module 3705 calls, rater 8352 calls
+checkpoint: 131/144 trials, module 3708 calls, rater 8354 calls
+checkpoint: 131/144 trials, module 3794 calls, rater 8556 calls
+checkpoint: 133/144 trials, module 3809 calls, rater 8589 calls
+checkpoint: 133/144 trials, module 3817 calls, rater 8606 calls
+checkpoint: 133/144 trials, module 3833 calls, rater 8647 calls
+checkpoint: 134/144 trials, module 3840 calls, rater 8671 calls
+checkpoint: 137/144 trials, module 3902 calls, rater 8802 calls
+checkpoint: 137/144 trials, module 3909 calls, rater 8816 calls
+checkpoint: 139/144 trials, module 3927 calls, rater 8869 calls
+checkpoint: 140/144 trials, module 3982 calls, rater 9003 calls
+checkpoint: 141/144 trials, module 3996 calls, rater 9025 calls
+checkpoint: 142/144 trials, module 4007 calls, rater 9041 calls
+checkpoint: 142/144 trials, module 4008 calls, rater 9041 calls
+checkpoint: 144/144 trials, module 4013 calls, rater 9049 calls
+checkpoint: 144/144 trials, module 4013 calls, rater 9049 calls
+Done. module: 1524172 in / 318868 out; rater: 1308875 in / 362239 out

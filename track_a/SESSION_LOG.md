@@ -117,3 +117,19 @@ so it is a prioritization failure). H3: no architecture effect at ~52%
 accuracy with genuine headroom (chance 33), McNemar p=1. Third data point
 for the thesis: the implementation-forced assumptions (what triggers
 revision, who computes salience) decided the result, not the workspace.
+
+## 2026-08-10 (session 1, close): rater-salience arm + paper fold-in
+
+Rater-salience arm (PREREG_SALIENCE.md) RAN after two recoverable failures
+(rater token cap, transient API 500; both documented, resumes free from
+cache). Primary contrast SUPPORTED: novel coverage 33.3 to 63.9 percent from
+changing only the salience function (p = 2.4e-4); revision null unchanged
+across regimes. $6.24. Full table in RESULTS.md. Track A total spend $10.56.
+
+Also this session: post hoc directional revision analysis (strengthens the
+null; conflict/posthoc.py), and the manuscript restructured for the NoC
+special issue "Is There More to Consciousness Than Computation?" (deadline
+12/31/26): NoC section order, 241-word abstract, unfolding-argument framing,
+Track A folded in as Experiment 2, cover letter draft in paper/. The imposter
+ladder and Sonnet replication were run by the parallel Track B session, not
+this one.

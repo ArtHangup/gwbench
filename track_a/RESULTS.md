@@ -96,3 +96,29 @@ The sharper instrument strengthens the null. Oracle anchor: on
 single-defeater scenarios the same functions return a corrective share of
 exactly 1.0 with all revisions after delivery, so the pipeline can detect
 conflict-driven revision when it exists.
+
+## Rater-salience arm (preregistered, PREREG_SALIENCE.md)
+
+Same 144 scenarios, architecture A only, salience from a separate
+relevance rater instead of module self-rating.
+
+| measure | rater novel | self novel | rater routine | self routine |
+|---|---|---|---|---|
+| coverage | 46/72 | 24/72 | 47/72 | 43/72 |
+| median latency | 2.0 | 3.0 | 2 | 2 |
+| floor waste | 0 | 0 | 0 | 0 |
+| revised trials | 64/72 | 60/72 | 53/72 | 54/72 |
+| corrective share | 0.34 | 0.28 | 0.32 | 0.33 |
+
+Primary contrast (novel coverage, rater vs self): p = 0.0002444 (z), rates 0.639 vs 0.333.
+
+Reading: the preregistered primary contrast is SUPPORTED. Changing only the
+salience function, self-rating to a separate relevance rater, nearly doubles
+required-module coverage on novel scenarios (33.3 to 63.9 percent, p = 2.4e-4)
+and improves latency, with zero floor waste in both regimes; the oracle
+ceiling (100 percent) shows further headroom. Revision results are unchanged
+across salience regimes (ubiquitous, chance-like corrective share), so the
+revision null is robust, not an artifact of one salience choice. Together:
+GWT-4's recruitment is an achievement of the salience function, a choice the
+theory never states, and the fork is now demonstrated in both directions.
+Cost: $6.24 (4,013 module + 9,049 rater live calls).

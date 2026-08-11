@@ -108,9 +108,9 @@ contributions:
   \item \textbf{The specification underdetermines: broadcast and recruitment.} A
   preregistered implementation of GWT's conflict-resolution functions on a task
   family with genuine headroom finds that revision under broadcast is ubiquitous
-  rather than conflict-specific, that recruitment collapses under self-rated
-  salience where oracle salience recruits fully, and that a full workspace loop,
-  an ablated hub, and a flat prompt decide identically. The outcomes are set by choices the theory
+  rather than conflict-specific, that recruitment collapses or recovers with the
+  choice of salience function alone, and that a full workspace loop, an ablated
+  hub, and a flat prompt decide identically. The outcomes are set by choices the theory
   never makes: what triggers revision, and who computes salience
   (Section~\ref{sec:tracka}).
 
@@ -132,8 +132,7 @@ contributions:
   is blinding, rediscovered from first principles (Section~\ref{sec:exp3}).
 \end{enumerate}
 
-Everything below cost \$126.24 of API spend across roughly 60{,}000 model calls (\$107.68 for Experiments 1 and 3; \$4.32 for the preregistered conflict-and-recruitment run; the four preregistered perturbation grids together cost \$14.24) % TODO: add rater-salience arm cost
-, which we note because the main practical
+Everything below cost \$126.24 of API spend across roughly 75{,}000 model calls (\$107.68 for Experiments 1 and 3; \$10.56 for the preregistered conflict-and-recruitment run and its rater-salience arm; the four preregistered perturbation grids together cost \$14.24), which we note because the main practical
 obstacle to this kind of work is not compute but measurement: most of the
 calls were spent discovering that earlier, cheaper versions of the experiment
 could not answer the question.
@@ -473,8 +472,14 @@ urgency as salience, only 33\% of novel trials achieved full delivery of every
 required module's content (oracle salience: 100\%), with zero wasted broadcast
 slots: an orderly prioritization failure, not thrash, and \emph{lower} coverage
 on novel than routine scenarios (60\%) because the defeating module is
-additionally required. The theory specifies a salience competition but not the
-salience function, and the choice decides whether recruitment happens at all.
+additionally required. A preregistered follow-up arm then changed only the
+salience function, replacing each module's self-rating with a separate
+relevance rater shown nothing but the decision question and the statement
+text: required-module coverage on novel scenarios rose from 33 to 64 percent
+($p=2.4\times10^{-4}$), median latency improved, floor waste stayed zero, and
+every revision result was unchanged. The theory specifies a salience
+competition but not the salience function, and that unstated choice decides,
+in both directions, whether recruitment happens at all.
 
 \paragraph{No architecture effect, with headroom.} Controller accuracy on
 novel scenarios is 51 to 53\% for all three architectures against a 33\%
@@ -1021,7 +1026,7 @@ assessment-by-interview provides.
 Experiments, analysis, and drafting were carried out in collaboration with
 Claude (Anthropic), an AI assistant, under the author's direction; the assistant
 is a member of the model family under study, which readers may weigh as they see
-fit. Total API cost was \$126.24 plus the rater-salience arm. % TODO: final total once salience arm lands The author has no financial relationship with
+fit. Total API cost was \$132.48. The author has no financial relationship with
 Anthropic beyond consumer-priced API access.
 
 \section*{Funding}
