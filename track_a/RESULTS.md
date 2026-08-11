@@ -72,3 +72,27 @@ For the poster thesis this is a clean third data point: implementing GWT-3
 and GWT-4 forced two assumptions the theory never states (what triggers
 revision, who computes salience), and both assumptions, not the workspace
 itself, decided the result.
+
+## Post hoc: directional revision analysis (2026-08-10, NOT preregistered)
+
+The preregistered DV was the blunt trial-level "any stance change" indicator.
+A predictable objection is that a finer measure would recover
+conflict-specificity the blunt one missed. Computed from the same 432 trials
+(`conflict/posthoc.py`), it does the opposite:
+
+- **Corrective share.** Of 290 revisions in A-novel trials, 80 moved to the
+  correct option (27.6 percent). Of 186 revisions in A-routine trials, 61 did
+  (32.8 percent). Revisions under broadcast are churn, not conflict
+  resolution: the share landing on the correct answer is no higher on novel
+  scenarios, and both sit near what re-picking among three options would
+  give.
+- **Timing.** In the 50 of 72 novel trials where the defeating module's
+  content cleared the workspace at all, 89 percent of corrective revisions
+  occurred after that delivery, against an 86 percent uniform-exposure
+  expectation (deliveries happen early); one-sided binomial p = 0.28. No
+  concentration beyond exposure.
+
+The sharper instrument strengthens the null. Oracle anchor: on
+single-defeater scenarios the same functions return a corrective share of
+exactly 1.0 with all revisions after delivery, so the pipeline can detect
+conflict-driven revision when it exists.
