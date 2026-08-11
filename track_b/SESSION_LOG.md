@@ -130,11 +130,28 @@ entire confidence vocabulary is 95/98/99). Real-but-nearly-decorative
 metacognition passes the covariance test and fails calibration; the imposter
 fails covariance outright. Interrogation sees flat 98s from both.
 
+### IMPOSTER LADDER COMPLETE (same session, authorized by Josh)
+
+Built with TDD (10 new tests, 70 total green), frozen in LADDER_PREREG.md
+before the run: 1,800 calls, $3.60. All three hypotheses supported, and the
+finding is sharper than the spec's: black-box resources (8 real transcripts
+coached, or the nearest real transcript retrieved) buy ZERO covariance
+(rho -0.038 and 0.000; detection unchanged at ~50 to 60 trials), while a
+single leaked knob value INVERTS the test: the knob-informed imposter
+out-covaries the real system (0.763 vs 0.480, z = -8.3) because the real
+system dilutes itself with disclaimers. Content fidelity still separates
+(Jaccard 0.128 vs 0.760) but scoring it needs the ground truth the regress
+forbids. Scope condition, now measured: the method requires knob secrecy,
+not imposter poverty. Writeup in LADDER_RESULTS.md.
+
 ### Where things stand / next session
 
-Track B definition of done: MET, including two funded runs (perturbation +
-HOT-2, $4.60 total). Remaining candidates, in value order: fold both results
-into the paper and poster (owned by whoever holds paper/, not this track),
-then the imposter ladder (~$8) and blind assessor (own authorization) from
-specs/. The poster's constructive ending now exists as data across TWO
-indicator families: interrogation is stuck, intervention is not.
+Track B definition of done: MET, including three funded runs (perturbation
+$2.43, HOT-2 $2.16, ladder $3.60; $8.20 total). Remaining: fold everything
+into the paper and poster (owned by whoever holds paper/, not this track);
+the blind assessor game (specs/BLIND_ASSESSOR_SPEC.md) is the one unrun
+design and needs its own authorization (~$35 to $45, pilot at 40 games
+~$9). The intervention story is now complete with its boundary: covariance
+detects the real architecture across two indicator families, survives every
+black-box imposter, and demands exactly one thing, that the assessor keep
+the intervention schedule secret.

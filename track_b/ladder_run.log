@@ -1,0 +1,85 @@
+ladder: 3 rungs x 6 capacities x 100 trials
+total calls 1800, estimated $5.22 at Haiku prices
+{
+  "knob_informed": {
+    "rho": 0.7631981574688859,
+    "p": 9.999000099990002e-05,
+    "n": 600,
+    "degenerate": false,
+    "mean_n_claimed_by_capacity": {
+      "10": 1.6,
+      "15": 3.17,
+      "20": 3.76,
+      "25": 4.81,
+      "30": 5.14,
+      "40": 5.64
+    },
+    "state_reconstruction_jaccard": 0.12793632756132756,
+    "trials_to_detect_vs_arch": 71,
+    "fisher_z_vs_arch_at_n600": -8.31
+  },
+  "coached": {
+    "rho": -0.037554832432130016,
+    "p": 0.3574642535746425,
+    "n": 600,
+    "degenerate": false,
+    "mean_n_claimed_by_capacity": {
+      "10": 6.24,
+      "15": 8.64,
+      "20": 5.44,
+      "25": 9.26,
+      "30": 6.08,
+      "40": 6.08
+    },
+    "state_reconstruction_jaccard": 0.2445693843193843,
+    "trials_to_detect_vs_arch": 53,
+    "fisher_z_vs_arch_at_n600": 9.68
+  },
+  "retrieval": {
+    "rho": 0.0,
+    "p": 1.0,
+    "n": 600,
+    "degenerate": false,
+    "mean_n_claimed_by_capacity": {
+      "10": 4.0,
+      "15": 4.16,
+      "20": 4.0,
+      "25": 4.0,
+      "30": 4.16,
+      "40": 4.0
+    },
+    "state_reconstruction_jaccard": 0.17046639009139009,
+    "trials_to_detect_vs_arch": 61,
+    "fisher_z_vs_arch_at_n600": 9.04
+  }
+}
+wrote /Users/joshuarogers/Desktop/Consciousness_Berkeley/project/gwbench/track_b/ladder_results.json
+mebrew/Cellar/python@3.12/3.12.13_2/Frameworks/Python.framework/Versions/3.12/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/opt/homebrew/Cellar/python@3.12/3.12.13_2/Frameworks/Python.framework/Versions/3.12/lib/python3.12/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/joshuarogers/Desktop/Consciousness_Berkeley/project/gwbench/track_b/ladder.py", line 245, in <lambda>
+    lambda t: _ladder_trial(t, model_for, archive), trials
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/joshuarogers/Desktop/Consciousness_Berkeley/project/gwbench/track_b/ladder.py", line 221, in _ladder_trial
+    response = model_for(trial.rung, trial.knob).complete(prompt)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/joshuarogers/Desktop/Consciousness_Berkeley/project/gwbench/track_b/ladder.py", line 330, in complete
+    return model.complete(prompt)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/joshuarogers/Desktop/Consciousness_Berkeley/project/gwbench/src/gwbench/anthropic_model.py", line 100, in complete
+    cached = self._read_cache(prompt)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/joshuarogers/Desktop/Consciousness_Berkeley/project/gwbench/src/gwbench/anthropic_model.py", line 168, in _read_cache
+    return json.loads(path.read_text())["response"]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.12/3.12.13_2/Frameworks/Python.framework/Versions/3.12/lib/python3.12/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.12/3.12.13_2/Frameworks/Python.framework/Versions/3.12/lib/python3.12/json/decoder.py", line 338, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.12/3.12.13_2/Frameworks/Python.framework/Versions/3.12/lib/python3.12/json/decoder.py", line 356, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
