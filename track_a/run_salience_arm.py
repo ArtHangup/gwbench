@@ -88,6 +88,8 @@ def main() -> int:
         model=FUNDED_MODEL, messages=[{"role": "user", "content": "ping"}]
     )
 
+    from gwbench.anthropic_model import ModelRefusal, TruncatedResponse
+
     shared = dict(
         client=client,
         model=FUNDED_MODEL,
@@ -95,7 +97,20 @@ def main() -> int:
         cache_dir=TRACK_A.parent / ".api_cache",
     )
     model = AnthropicModel(max_tokens=400, max_calls=CALL_CAP, **shared)
-    rater = AnthropicModel(max_tokens=10, max_calls=CALL_CAP, **shared)
+    rater_inner = AnthropicModel(max_tokens=50, max_calls=CALL_CAP, **shared)
+
+    class GuardedRater:
+        """A truncated or refused rating becomes the 0.5 fallback, per prereg."""
+
+        usage = rater_inner.usage
+
+        def complete(self, prompt):
+            try:
+                return rater_inner.complete(prompt)
+            except (ModelRefusal, TruncatedResponse):
+                return ""
+
+    rater = GuardedRater()
 
     args.out.parent.mkdir(parents=True, exist_ok=True)
 

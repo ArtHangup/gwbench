@@ -57,3 +57,14 @@ def test_stance_statements_pass_through_untouched():
     stance = [s for s in statements if s.payload["kind"] == "stance"][0]
     assert stance.salience == 0.5
     assert stance.payload["option"] == "B"
+
+
+def test_prefaced_rating_still_parses():
+    inner = _inner("SAY: One. | URGENCY: 0.2\nRECOMMEND: NONE")
+    rater = ScriptedModel(["Urgency: 0.8, given the closure."])
+    say = [
+        s
+        for s in RaterModule(inner, rater).emit(visible=[])
+        if s.payload["kind"] == "model"
+    ]
+    assert say[0].salience == 0.8

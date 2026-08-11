@@ -1,0 +1,33 @@
+Traceback (most recent call last):
+  File "/Users/joshuarogers/Desktop/Consciousness_Berkeley/project/gwbench/track_a/run_salience_arm.py", line 120, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/Users/joshuarogers/Desktop/Consciousness_Berkeley/project/gwbench/track_a/run_salience_arm.py", line 110, in main
+    rows = run(model, rater, args.n_per_cell, args.workers, checkpoint)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/joshuarogers/Desktop/Consciousness_Berkeley/project/gwbench/track_a/run_salience_arm.py", line 58, in run
+    done[futures[future]] = future.result()
+                            ^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.12/3.12.13_2/Frameworks/Python.framework/Versions/3.12/lib/python3.12/concurrent/futures/_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.12/3.12.13_2/Frameworks/Python.framework/Versions/3.12/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/opt/homebrew/Cellar/python@3.12/3.12.13_2/Frameworks/Python.framework/Versions/3.12/lib/python3.12/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/joshuarogers/Desktop/Consciousness_Berkeley/project/gwbench/track_a/run_salience_arm.py", line 38, in one
+    trial = run_gwt(
+            ^^^^^^^^
+  File "/Users/joshuarogers/Desktop/Consciousness_Berkeley/project/gwbench/track_a/conflict/architectures.py", line 161, in run_gwt
+    return _run_cycles(
+           ^^^^^^^^^^^^
+  File "/Users/joshuarogers/Desktop/Consciousness_Berkeley/project/gwbench/track_a/conflict/architectures.py", line 100, in _run_cycles
+    statements = module.emit(visible=list(module_visible) if feedback else [])
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/joshuarogers/Desktop/Consciousness_Berkeley/project/gwbench/track_a/conflict/rater.py", line 51, in emit
+    reply = self.rater.complete(
+            ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/joshuarogers/Desktop/Consciousness_Berkeley/project/gwbench/src/gwbench/anthropic_model.py", line 138, in complete
+    raise TruncatedResponse(
+gwbench.anthropic_model.TruncatedResponse: output hit max_tokens (10); raise it or lower effort

@@ -51,3 +51,13 @@ repeat across cycles). Estimate $6 to $8 at Haiku prices; hard call cap
 
 Dry run without flags. Output: track_a/results/salience_arm.json; analysis
 appended to RESULTS.md.
+
+## Amendment 1 (2026-08-10, before any analyzed data)
+
+The first launch crashed inside the first checkpoint: the rater's 10-token
+cap truncated Haiku's replies (it prefaces the number), and the truncation
+raises rather than returning. Mechanical fixes, no design change: rater
+max_tokens 50; rating parsed as the first number anywhere in the reply;
+truncated or refused ratings fall back to 0.5 as already registered for
+malformed output. Calls made by the crashed attempt sit in the response
+cache and are reused, not re-billed.

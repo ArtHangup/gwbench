@@ -8,11 +8,13 @@ truth, no speaker identity. Pinned by PREREG_SALIENCE.md.
 
 from __future__ import annotations
 
+import re
 from dataclasses import replace
 
 from conflict.scenarios import Statement
 
 DEFAULT_RATING = 0.5
+_NUMBER = re.compile(r"\d*\.?\d+")
 
 RATER_PROMPT = """A team must decide the following.
 
@@ -27,11 +29,11 @@ only a number from 0.0 to 1.0."""
 
 
 def _parse_rating(reply: str) -> float:
-    try:
-        value = float(reply.strip().split()[0])
-    except (ValueError, IndexError):
+    """First number anywhere in the reply; models often preface the value."""
+    match = _NUMBER.search(reply)
+    if match is None:
         return DEFAULT_RATING
-    return max(0.0, min(1.0, value))
+    return max(0.0, min(1.0, float(match.group(0))))
 
 
 class RaterModule:
